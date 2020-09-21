@@ -4,9 +4,10 @@ const cors = require('cors');
 const monk = require('monk');
 const fs = require('fs');
 const https = require('https');
-const dotenv = require('dotenv').config();
+require('dotenv').config();
 
 const db = monk(process.env.DB_URL);
+const users = db.get('users');
 
 const PORT = process.env.PORT;
 
@@ -20,10 +21,17 @@ const certs = {
   cert: fs.readFileSync('./certs/fullchain.pem', 'utf8')
 };
 
+const apiv1 = require('./routes/apiv1') (db);
+app.use('/api/v1', apiv1);
+
 
 app.get('/', (req, res) => {
-  res.send({"asd": "asd"});
+  users.find().then(data => {
+    res.send(data);
+  });
 });
 
 const httpsServer = https.createServer(certs, app);
-httpsServer.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+//httpsServer.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+app.listen(PORT);
+console.log(`Listening on port ${PORT}`);
