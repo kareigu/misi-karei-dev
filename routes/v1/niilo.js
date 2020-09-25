@@ -1,8 +1,5 @@
-const express = require('express');
-const router = express.Router();
 
-
-module.exports = function (db) {
+module.exports = function (db, router) {
   router.post('/', (req, res) => {
     const data = req.body;
   
@@ -10,9 +7,9 @@ module.exports = function (db) {
       console.log(data);
       const quote = {
         text: data.text,
-        number: db.countDocuments() + 1
+        number: db.count() + 1
       };
-      db.insertOne(quote);
+      db.insert(quote);
       res.status(201);
       res.send(`Added niilo #${quote.number}`);
     } catch (err) {
