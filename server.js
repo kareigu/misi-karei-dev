@@ -16,12 +16,12 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const certs = {
+/* const certs = {
   key: fs.readFileSync('./certs/privkey.pem', 'utf8'),
   cert: fs.readFileSync('./certs/fullchain.pem', 'utf8')
-};
+}; */
 
-const apiv1 = require('./routes/apiv1') (db);
+const apiv1 = require('./api/v1/apiv1') (db);
 app.use('/api/v1', apiv1);
 
 
@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
   });
 });
 
-const httpsServer = https.createServer(certs, app);
-//httpsServer.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+/* const httpsServer = https.createServer(certs, app);
+httpsServer.listen(PORT, () => console.log(`Listening on port ${PORT}`)); */
 app.listen(PORT);
 console.log(`Listening on port ${PORT}`);
