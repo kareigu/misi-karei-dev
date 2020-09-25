@@ -3,7 +3,7 @@ module.exports = function(db, content) {
   return db.count({}).then(count => {
     const quote = {
       text: content.text,
-      number: count - 15
+      number: count + 1
     };
 
     const testIndex = require('./testIndex');
