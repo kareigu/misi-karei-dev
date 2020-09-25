@@ -1,5 +1,6 @@
 const addContent = require('../utils/addContent');
 const checkAuth = require('../utils/checkAuth');
+const getData = require('../utils/getData');
 
 module.exports = function (db, router) {
   router.post('/', (req, res) => {
@@ -17,8 +18,9 @@ module.exports = function (db, router) {
   });
   
   router.get('/', (req, res) => {
-    db.find().then(data => {
-      res.send(data);
+    getData(db, req.query).then(response => {
+      res.status(200);
+      res.send(response);
     });
   });
 
