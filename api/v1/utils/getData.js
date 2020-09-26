@@ -1,25 +1,24 @@
+const randomQuote = require('./randomQuote');
+const searchQuote = require('./searchQuote');
+
 module.exports = async function(db, params) {
   if(params.fullList === 'true') {
     return db.find().then(res => res);
   } else {
-    return db.count().then(count => {
-      const index = getRandomInt(count);
-      return db.find({"number": index}).then(result => {
-        let output = result[0];
-        
-        if(params.raw === 'true') {
-          if(output)
-            return output.text;
-          else
-            return 'Error';
-        } else {
-          return output;
-        }
-      });
-    });
-  }
-}
+    let output;
+    if(params.search == undefined || params.search === '') {
+      output = await randomQuote(db);
+    } else {
+      output = await searchQuote(db, params.search);
+    }
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * Math.floor(max));
+    if(!output)
+      output = {text: `Èrror: invalid quote - ${params.query}`};
+
+    if(params.raw === 'true') {
+      return output.text;
+    } else {
+      return output;
+    }
+  }
 }
