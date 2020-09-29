@@ -1,12 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const monk = require('monk');
 const fs = require('fs');
 const https = require('https');
 require('dotenv').config();
 
-const db = monk(process.env.DB_URL);
+const db = require('monk')(process.env.DB_URL);
 const users = db.get('users');
 
 const PORT = process.env.PORT;

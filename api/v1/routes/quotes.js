@@ -3,7 +3,7 @@ const checkAuth = require('../utils/checkAuth');
 const getData = require('../utils/getData');
 
 module.exports = function (db, router) {
-  router.post('/', (req, res) => {
+  router.post('/quotes', (req, res) => {
     if(checkAuth(req.headers.authorization)) {
       addContent(db, req.body).then(data => {
         console.log(data);
@@ -17,7 +17,7 @@ module.exports = function (db, router) {
     
   });
   
-  router.get('/', (req, res) => {
+  router.get('/quotes', (req, res) => {
     getData(db, req.query).then(response => {
       res.status(200);
       res.send(response);
