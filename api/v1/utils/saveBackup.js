@@ -16,6 +16,9 @@ module.exports = async function(db) {
     }
   });
 
-  console.log(filename);
-  return filename;
+  file = {
+    name: filename,
+    contents: backup
+  }
+  return file;
 }

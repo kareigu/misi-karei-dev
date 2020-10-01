@@ -4,6 +4,9 @@ const cors = require('cors');
 const fs = require('fs');
 const https = require('https');
 require('dotenv').config();
+const path = require('path');
+
+global.appRoot = path.resolve(__dirname);
 
 const db = require('monk')(process.env.DB_URL);
 const users = db.get('users');

@@ -27,9 +27,11 @@ module.exports = function (db, router) {
   });
 
   router.get('/quotes/backup', (req, res) => {
-    saveBackup(db).then(data => {
+    saveBackup(db).then(file => {
       res.status(200);
-      res.send(data);
+      res.setHeader('Content-type', "application/octet-stream");
+      res.setHeader('Content-disposition', `attachment; filename=${file.name}`);
+      res.send(file.contents);
     });
   });
 
