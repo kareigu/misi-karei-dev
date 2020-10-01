@@ -2,6 +2,7 @@ const addContent = require('../utils/addContent');
 const checkAuth = require('../utils/checkAuth');
 const getData = require('../utils/getData');
 const removeContent = require('../utils/removeContent');
+const saveBackup = require('../utils/saveBackup');
 
 module.exports = function (db, router) {
   router.post('/quotes', (req, res) => {
@@ -22,6 +23,13 @@ module.exports = function (db, router) {
     getData(db, req.query).then(response => {
       res.status(200);
       res.send(response);
+    });
+  });
+
+  router.get('/quotes/backup', (req, res) => {
+    saveBackup(db).then(data => {
+      res.status(200);
+      res.send(data);
     });
   });
 
