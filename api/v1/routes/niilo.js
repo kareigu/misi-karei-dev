@@ -2,6 +2,7 @@ const addContent = require('../utils/addContent');
 const checkAuth = require('../utils/checkAuth');
 const getData = require('../utils/getData');
 const removeContent = require('../utils/removeContent');
+const saveBackup = require('../utils/saveBackup');
 
 module.exports = function (db, router) {
   router.post('/niilo', (req, res) => {
@@ -21,6 +22,15 @@ module.exports = function (db, router) {
     getData(db, req.query).then(response => {
       res.status(200);
       res.send(response);
+    });
+  });
+
+  router.get('/niilo/backup', (req, res) => {
+    saveBackup(db).then(file => {
+      res.status(200);
+      res.setHeader('Content-type', "application/octet-stream");
+      res.setHeader('Content-disposition', `attachment; filename=${file.name}`);
+      res.send(file.contents);
     });
   });
 
