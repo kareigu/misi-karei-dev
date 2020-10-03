@@ -3,6 +3,7 @@ const checkAuth = require('../utils/checkAuth');
 const getData = require('../utils/getData');
 const removeContent = require('../utils/removeContent');
 const saveBackup = require('../utils/saveBackup');
+const loadBackup = require('../utils/loadBackup');
 
 module.exports = function (db, router) {
   router.post('/quotes', (req, res) => {
@@ -16,7 +17,19 @@ module.exports = function (db, router) {
       res.status(401);
       res.send({"Unauthorized": "Invalid token"});
     }
-    
+  });
+
+  router.post('/quotes/backup', (req, res) => {
+    if(checkAuth(req.headers.authorization)) {
+      loadBackup(db, req.body).then(response => {
+        console.log(req.body);
+        res.status(response.status);
+        res.send(response.message);
+      });
+    } else {
+      res.status(401);
+      res.send({"Unauthorized": "Invalid token"});
+    }
   });
   
   router.get('/quotes', (req, res) => {
