@@ -1,0 +1,45 @@
+:root {
+  --main-accent: #CD03FF;
+  --secondary-accent: #FF4F03;
+  --select-color: #35FF03;
+  --link: #03B3FF;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40px;
+  pointer-events: none;
+  box-shadow: 2px 2px 2px 1px var(--main-accent);
+}
+
+.App-header {
+  background-color: #282c34;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  box-shadow: 0px 5px var(--main-accent);
+}
+
+.App-header a {
+  text-decoration: none;
+  color: #FFF;
+  border-bottom: 2px solid var(--main-accent);
+}
+
+.App-header a:hover {
+  border-color: var(--secondary-accent);
+}
+
+.active {
+  border-color: var(--select-color);
+}
+
+.App-link {
+  color: var(--link);
+}

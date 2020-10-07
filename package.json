@@ -17,11 +17,14 @@
   },
   "homepage": "https://github.com/mxrr/quotes#readme",
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@types/react-router-dom": "^5.1.6",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "monk": "^7.3.2",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "react-router-dom": "^5.2.0"
   }
 }

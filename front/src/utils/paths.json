@@ -1,0 +1,4 @@
+{
+  "devPath": "https://localhost:6020/api/v1/",
+  "productionPath": "/api/v1"
+}
