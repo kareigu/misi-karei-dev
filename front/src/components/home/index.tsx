@@ -1,9 +1,10 @@
 import React from 'react';
 import './Home.css';
+import Logo from '../../temp.gif'
 
 function Home() {
   return (
-    <h1>Home</h1>
+    <img id="logo" src={Logo} />
   );
 }
 
