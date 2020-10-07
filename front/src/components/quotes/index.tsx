@@ -1,15 +1,20 @@
 import React from 'react';
 import './Quotes.css'
-import usePostQuoteService from '../../utils/getData';
+import GetFullQuoteList from '../../utils/getData';
+import QuoteBlock from '../QuoteBlock';
 
 function Quotes() {
-  const service = usePostQuoteService();
+  const service = GetFullQuoteList('quotes');
   return (
-    <div>
+    <div className="quotelist-container">
       {service.status === 'loading' && <div>Loading...</div>}
       {service.status === 'loaded' &&
         service.payload.map(quote => (
-          <div key={quote.number}>#{quote.number} - {quote.text}</div>
+          <QuoteBlock 
+            key={quote._id} 
+            text={quote.text} 
+            number={quote.number}
+          />
         ))}
       {service.status === 'error' && (
         <div>Error, the backend moved to the dark side.</div>

@@ -9,3 +9,5 @@ export type Quote = {
   text: string,
   number: number
 }
+
+export type Source = 'niilo' | 'quotes';

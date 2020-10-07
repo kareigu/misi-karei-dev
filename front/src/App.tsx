@@ -10,6 +10,7 @@ import './App.css';
 import Quotes from './components/quotes';
 import Niilo from './components/niilo';
 import Home from './components/home';
+import Debug from './components/debug'
 
 import NavButton from './components/NavButtons';
 
@@ -25,6 +26,7 @@ function App() {
               <NavButton to="/" text="Home" />
               <NavButton to="quotes" text="Quotes" />
               <NavButton to="niilo" text="Niilo" />
+              <NavButton to="debug" text="Debug" />
             </ul>
           </nav>
         </header>
@@ -35,6 +37,9 @@ function App() {
           </Route>
           <Route path="/niilo">
             <Niilo />
+          </Route>
+          <Route path="/debug">
+            <Debug />
           </Route>
           <Route path="/">
             <Home />
