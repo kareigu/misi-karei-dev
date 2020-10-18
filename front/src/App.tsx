@@ -26,7 +26,6 @@ function App() {
               <NavButton to="/" text="Home" />
               <NavButton to="quotes" text="Quotes" />
               <NavButton to="niilo" text="Niilo" />
-              <NavButton to="debug" text="Debug" />
             </ul>
           </nav>
         </header>

@@ -4,7 +4,7 @@ import Logo from '../../temp.gif'
 
 function Home() {
   return (
-    <img id="logo" src={Logo} />
+    <img id="logo" src={Logo} alt="kettukaani"/>
   );
 }
 

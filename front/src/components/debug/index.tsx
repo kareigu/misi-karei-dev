@@ -13,7 +13,7 @@ function Debug() {
       text: backup
     }
 
-    fetch('https://localhost:6020/api/v1/quotes/backup',
+    fetch('https://localhost:6020/api/v1/niilo/backup',
     {
       method: 'POST',
       mode: 'cors',
