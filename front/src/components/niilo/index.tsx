@@ -15,6 +15,7 @@ function Niilo() {
             text={quote.text} 
             number={quote.number}
             usertype="normal"
+            origin="niilo"
           />
         ))}
       {service.status === 'error' && (

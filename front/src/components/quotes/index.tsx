@@ -15,6 +15,7 @@ function Quotes() {
             text={quote.text} 
             number={quote.number}
             usertype="admin"
+            origin="quotes"
           />
         ))}
       {service.status === 'error' && (

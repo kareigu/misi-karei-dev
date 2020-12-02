@@ -1,11 +1,13 @@
 import React from 'react';
 import Modal from 'react-modal'
 import './QuoteBlock.css';
+import paths from '../../utils/paths.json';
 
 type values = {
   text: string,
   number: number,
-  usertype: 'normal' | 'admin'
+  usertype: 'normal' | 'admin',
+  origin: 'quotes' | 'niilo'
 }
 
 Modal.setAppElement('body');
@@ -37,6 +39,18 @@ function QuoteBlock(props: values) {
 
   function closeModal() {
     setOpen(!modalOpen);
+  }
+
+  function removeQuote() {
+    fetch(`${process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath}${props.origin === 'quotes' ? 'quotes' : 'niilo'}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `${localStorage.getItem('token')}`
+        },
+        body: `${props.number}`
+      }
+    ).then(res => console.log({Res: res, "prop": {"id": props.number}}))
   }
 
   return (
@@ -76,7 +90,7 @@ function QuoteBlock(props: values) {
                 <h4 onClick={() => setEditing(false)} id="cancelButton" className="adminButtons">Cancel</h4>
               </div>)
               : <h3 onClick={() => setEditing(true)} id="editButton" className="adminButtons">Edit</h3>}
-            <h3 id="removeButton" className="adminButtons">Remove</h3>
+            <h3 onClick={removeQuote} id="removeButton" className="adminButtons">Remove</h3>
           </div>
         }
           
