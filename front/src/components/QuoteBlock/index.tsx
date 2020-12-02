@@ -29,15 +29,14 @@ function QuoteBlock(props: values) {
   };
 
   const [modalOpen, setOpen] = React.useState(false);
+  const [isEditing, setEditing] = React.useState(false);
 
   function openModal() {
     setOpen(true);
-    console.log('modal opened');
   }
 
   function closeModal() {
     setOpen(!modalOpen);
-    console.log('modal closed');
   }
 
   return (
@@ -53,14 +52,33 @@ function QuoteBlock(props: values) {
         overlayClassName="Overlay"
       >
         <h2 id="modalTitle">#{props.number} </h2>
-          <h1 
-            id="closeButton"
-            onClick={closeModal}
-          >
-          X
-          </h1>
-          <br></br>
-          <div id="modalText">{props.text}</div>
+        <h1 
+          id="closeButton"
+          onClick={closeModal}
+        >
+        X
+        </h1>
+        <br></br>
+        <div id="modalText">{props.text}</div>
+
+        { isEditing && 
+          <div>
+            <textarea defaultValue={props.text}>
+            </textarea>
+          </div>
+        }
+
+        { props.usertype === 'admin' &&
+          <div>
+            {isEditing 
+              ? (<div>
+                <h4 id="saveButton" className="adminButtons">Save</h4>
+                <h4 onClick={() => setEditing(false)} id="cancelButton" className="adminButtons">Cancel</h4>
+              </div>)
+              : <h3 onClick={() => setEditing(true)} id="editButton" className="adminButtons">Edit</h3>}
+            <h3 id="removeButton" className="adminButtons">Remove</h3>
+          </div>
+        }
           
       </Modal>
       <h2 id="number">#{props.number}</h2>

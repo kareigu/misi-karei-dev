@@ -75,3 +75,31 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.75);
 }
+
+.adminButtons {
+  position: absolute;
+  bottom: -5px;
+  padding: 0px 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+
+.adminButtons:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  filter: brightness(2);
+}
+
+#removeButton {
+  right: 5px;
+}
+
+#cancelButton {
+  color: red;
+  left: 75px;
+}
+
+#saveButton {
+  color: green;
+  left: 20px;
+}
