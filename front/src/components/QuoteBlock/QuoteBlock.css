@@ -9,7 +9,12 @@
   width: 300px;
   height: 70px;
   border-radius: 5px;
+  border: 2px solid #1c1e24;
   overflow: hidden;
+}
+
+.container:hover {
+  border-color: white;
 }
 
 #number {
@@ -31,4 +36,42 @@
   white-space: pre-line;
   width: 270px;
   height: 48px
+}
+
+#modalText {
+  position: relative;
+  text-align: center;
+}
+
+#modalTitle {
+  position: absolute;
+  top: -20px;
+  left: 0px;
+  right: auto;
+  bottom: auto;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  user-select: none;
+}
+
+#closeButton {
+  position: absolute;
+  right: 5px;
+  top: -20px;
+  color: rgba(255, 0, 76, 0.664);
+  width: 30px;
+  user-select: none;
+}
+
+#closeButton:hover {
+  color:  rgba(255, 0, 76, 1);
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
 }

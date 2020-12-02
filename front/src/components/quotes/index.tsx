@@ -14,6 +14,7 @@ function Quotes() {
             key={quote._id} 
             text={quote.text} 
             number={quote.number}
+            usertype="admin"
           />
         ))}
       {service.status === 'error' && (
