@@ -20,7 +20,7 @@ function Debug() {
       credentials: 'same-origin',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'asdasda'
+        'Authorization': `${localStorage.getItem('token') || 'invalid'}`
       },
       body: JSON.stringify(data)
     })
