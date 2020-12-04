@@ -33,6 +33,7 @@ function QuoteBlock(props: values) {
   const [modalOpen, setOpen] = React.useState(false);
   const [isEditing, setEditing] = React.useState(false);
   const [adminMsg, setAdminMsg] = React.useState('');
+  const [editorText, setEditorText] = React.useState(props.text);
 
   function openModal() {
     setOpen(true);
@@ -77,6 +78,35 @@ function QuoteBlock(props: values) {
     });
   }
 
+  function editQuote() {
+    console.log(editorText);
+    const data = {
+      text: editorText,
+      id: props.number
+    }
+    fetch(`${process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath}${props.origin === 'quotes' ? 'quotes' : 'niilo'}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Authorization': `${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }
+    ).then(res => {
+      if(res.status === 201) {
+        setEditing(false);
+        setAdminMsg('Quote updated');
+        setTimeout(() => {
+          closeModal();
+          window.location.reload();
+        }, 1000);
+      } else {
+        setAdminMsg(`${res.body}`);
+      }
+    })
+  }
+
   return (
     <div 
       className="container" 
@@ -101,7 +131,11 @@ function QuoteBlock(props: values) {
 
         { isEditing && 
           <div>
-            <textarea defaultValue={props.text}>
+            <textarea 
+              id="editField" 
+              value={editorText}
+              onChange={e => setEditorText(e.target.value)}
+            >
             </textarea>
           </div>
         }
@@ -110,7 +144,7 @@ function QuoteBlock(props: values) {
           <div>
             {isEditing 
               ? (<div>
-                <h4 id="saveButton" className="adminButtons">Save</h4>
+                <h4 onClick={editQuote} id="saveButton" className="adminButtons">Save</h4>
                 <h4 onClick={() => setEditing(false)} id="cancelButton" className="adminButtons">Cancel</h4>
               </div>)
               : <h3 onClick={() => setEditing(true)} id="editButton" className="adminButtons">Edit</h3>}

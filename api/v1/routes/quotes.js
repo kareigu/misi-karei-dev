@@ -4,6 +4,7 @@ const getData = require('../utils/getData');
 const removeContent = require('../utils/removeContent');
 const saveBackup = require('../utils/saveBackup');
 const loadBackup = require('../utils/loadBackup');
+const editContent = require('../utils/editContent');
 
 module.exports = function (db, router) {
   router.post('/quotes', (req, res) => {
@@ -53,6 +54,19 @@ module.exports = function (db, router) {
       removeContent(db, req.body.id).then(data => {
         console.log(data);
         res.status(200);
+        res.send(data);
+      });
+    } else {
+      res.status(401);
+      res.send({"Unauthorized": "Invalid token"});
+    }
+  });
+
+  router.put('/quotes', (req, res) => {
+    if(checkAuth(req.headers.authorization)) {
+      editContent(db, req.body).then(data => {
+        console.log(data);
+        res.status(201);
         res.send(data);
       });
     } else {
