@@ -27,7 +27,7 @@ const apiv1 = require('./api/v1/apiv1') (db);
 app.use('/api/v1', apiv1);
 
 app.use('/', express.static('./dist'));
-app.get('/', (req, res) => {
+app.get('/:var(quotes|niilo|debug)?', (req, res) => {
   res.sendFile('./dist/index.html')
 });
 
