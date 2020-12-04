@@ -32,7 +32,7 @@
   max-height: 70px;
   bottom: -15px;
   padding: 10px;
-  overflow-y: scroll;
+  overflow-y: hidden;
   white-space: pre-line;
   width: 270px;
   height: 48px
