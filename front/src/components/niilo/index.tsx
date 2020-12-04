@@ -14,7 +14,7 @@ function Niilo() {
             key={quote._id} 
             text={quote.text} 
             number={quote.number}
-            usertype="normal"
+            usertype="admin"
             origin="niilo"
           />
         ))}
