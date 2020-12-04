@@ -26,11 +26,9 @@ const certs = {
 const apiv1 = require('./api/v1/apiv1') (db);
 app.use('/api/v1', apiv1);
 
-
+app.use('/', express.static('./dist'));
 app.get('/', (req, res) => {
-  users.find().then(data => {
-    res.send(data);
-  });
+  res.sendFile('./dist/index.html')
 });
 
 const httpsServer = https.createServer(certs, app);
