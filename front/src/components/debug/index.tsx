@@ -1,8 +1,17 @@
 import React, { ChangeEvent, FormEvent } from 'react';
 import { useState } from 'react';
+import paths from '../../utils/paths.json'
 
 function Debug() {
   const [backup, setBackup] = useState('');
+  const [selectedDB, setSelectedDB] = useState('quotes');
+
+  function switchDB() {
+    if(selectedDB === 'quotes')
+      setSelectedDB('niilo');
+    else
+      setSelectedDB('quotes');
+  }
 
   const handleChange = (event: ChangeEvent) => {
     setBackup((event.target as HTMLTextAreaElement).value)
@@ -13,7 +22,7 @@ function Debug() {
       text: backup
     }
 
-    fetch('https://localhost:6020/api/v1/niilo/backup',
+    fetch(`${process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath}${selectedDB}/backup`,
     {
       method: 'POST',
       mode: 'cors',
@@ -34,6 +43,10 @@ function Debug() {
   return (
     <div>
       <h1>Debug</h1>
+      <button onClick={switchDB}>
+        {selectedDB}
+      </button>
+
       <form onSubmit={e => handleSubmit(e)}>
         <label>
           Backup:
