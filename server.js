@@ -28,7 +28,7 @@ app.use('/api/v1', apiv1);
 
 app.use('/', express.static('./dist'));
 app.get('/:var(quotes|niilo|debug)?', (req, res) => {
-  res.sendFile('./dist/index.html')
+  res.sendFile(`${__dirname}/dist/index.html`)
 });
 
 const httpsServer = https.createServer(certs, app);
