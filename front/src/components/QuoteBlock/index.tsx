@@ -32,6 +32,7 @@ function QuoteBlock(props: values) {
 
   const [modalOpen, setOpen] = React.useState(false);
   const [isEditing, setEditing] = React.useState(false);
+  const [adminMsg, setAdminMsg] = React.useState('');
 
   function openModal() {
     setOpen(true);
@@ -41,22 +42,45 @@ function QuoteBlock(props: values) {
     setOpen(!modalOpen);
   }
 
+  function handleClick() {
+    if(window.getSelection()?.toString() !== '' || undefined){
+      return undefined;
+    } else {
+      return !modalOpen ? openModal() : undefined;
+    }
+  }
+
   function removeQuote() {
+    const data = {
+      id: props.number
+    }
+    console.log(JSON.stringify(data))
     fetch(`${process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath}${props.origin === 'quotes' ? 'quotes' : 'niilo'}`,
       {
         method: 'DELETE',
         headers: {
-          'Authorization': `${localStorage.getItem('token')}`
+          'Authorization': `${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json'
         },
-        body: `${props.number}`
+        body: JSON.stringify(data)
       }
-    ).then(res => console.log({Res: res, "prop": {"id": props.number}}))
+    ).then(res => {
+      if(res.status === 200) {
+        setAdminMsg('Quote removed');
+        setTimeout(() => {
+          closeModal();
+          window.location.reload();
+        }, 1000);
+      } else {
+        setAdminMsg(`${res.body}`);
+      }
+    });
   }
 
   return (
     <div 
       className="container" 
-      onClick={modalOpen ? undefined : openModal}
+      onClick={handleClick}
     >
       <Modal
         isOpen={modalOpen}
@@ -90,6 +114,7 @@ function QuoteBlock(props: values) {
                 <h4 onClick={() => setEditing(false)} id="cancelButton" className="adminButtons">Cancel</h4>
               </div>)
               : <h3 onClick={() => setEditing(true)} id="editButton" className="adminButtons">Edit</h3>}
+            <h3 id="adminMsg" className="adminButtons">{adminMsg}</h3>
             <h3 onClick={removeQuote} id="removeButton" className="adminButtons">Remove</h3>
           </div>
         }

@@ -52,6 +52,7 @@
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 3px;
   user-select: none;
+  padding: 0px 4px 0px 4px;
 }
 
 #closeButton {
@@ -102,4 +103,11 @@
 #saveButton {
   color: green;
   left: 20px;
+}
+
+#adminMsg {
+  text-align: center;
+  font-size: small;
+  left: 30%;
+  bottom: 5px;
 }
