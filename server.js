@@ -3,9 +3,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const fs = require('fs');
 const https = require('https');
-require('dotenv').config();
 const path = require('path');
 
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 global.appRoot = path.resolve(__dirname);
 
 const db = require('monk')(process.env.DB_URL);
