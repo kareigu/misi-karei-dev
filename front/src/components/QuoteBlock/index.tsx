@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal'
+import useFitText from 'use-fit-text'
 import './QuoteBlock.css';
 import paths from '../../utils/paths.json';
 
@@ -34,6 +35,7 @@ function QuoteBlock(props: values) {
   const [isEditing, setEditing] = React.useState(false);
   const [adminMsg, setAdminMsg] = React.useState('');
   const [editorText, setEditorText] = React.useState(props.text);
+  const {fontSize, ref} = useFitText();
 
   function openModal() {
     setOpen(true);
@@ -127,7 +129,17 @@ function QuoteBlock(props: values) {
         X
         </h1>
         <br></br>
-        <div id="modalText">{props.text}</div>
+        <div 
+          id="modalText"
+          { ...(props.text.length > 65 &&
+            {
+              ref: ref,
+              style: {fontSize}
+            }
+          )} 
+        >
+          {props.text}
+        </div>
 
         { isEditing && 
           <div>
@@ -155,7 +167,17 @@ function QuoteBlock(props: values) {
           
       </Modal>
       <h2 id="number">#{props.number}</h2>
-      <h4 id="quoteText">{props.text}</h4>
+      <h4 
+        id="quoteText"
+        { ...(props.text.length > 70 &&
+          {
+            ref: ref,
+            style: {fontSize}
+          }
+        )}
+      >
+        {props.text}
+      </h4>
     </div>
   );
 }
