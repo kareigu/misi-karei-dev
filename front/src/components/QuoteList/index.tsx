@@ -43,7 +43,9 @@ function QuoteList(props: props) {
 
   return (
     <div>
-      <PageSwitcher pageCount={pageCount} finalPage={finalPage} setPageCount={setPageCount} />
+      { service.status === 'loaded' &&
+        <PageSwitcher pageCount={pageCount} finalPage={finalPage} setPageCount={setPageCount} />
+      }
       
       <div className="quotelist-container">
         {service.status === 'loading' && <div>Loading...</div>}
