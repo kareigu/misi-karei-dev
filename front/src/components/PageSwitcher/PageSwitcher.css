@@ -1,0 +1,25 @@
+
+.pageControls {
+  position: relative;
+  top: 10px;
+  padding: 8px 0px;
+}
+
+.pageControls button {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: none;
+  border-radius: 5px;
+  width: 50px;
+  height: 25px;
+}
+
+.pageControls button:hover {
+  filter: invert(1);
+}
+
+.pageCounter {
+  padding: 0px 15px;
+  height: 35px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
