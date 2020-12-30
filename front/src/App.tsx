@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,11 +10,25 @@ import './App.css';
 import Quotes from './components/quotes';
 import Niilo from './components/niilo';
 import Home from './components/home';
-import Debug from './components/debug'
+import Debug from './components/debug';
+import Login from './components/Login';
 
 import NavButton from './components/NavButtons';
 
+import checkLogin from './utils/Login';
+
 function App() {
+  const token = (token: String | null) => {
+    if(token)
+      return token;
+    else
+      return '';
+  }
+
+  checkLogin(token(localStorage.getItem('token')))
+            .then(val => setLoggedIn(val));
+  const [loggedIn, setLoggedIn] = useState(false);
+
   return (
     <Router>
       <div className="App">
@@ -28,6 +42,13 @@ function App() {
               <NavButton to="niilo" text="Niilo" />
             </ul>
           </nav>
+
+          <nav className="adminPanels">
+            <NavButton 
+              to={loggedIn ? 'signout' : 'login'} 
+              text={loggedIn ? 'Sign out' : 'Login'} 
+            />
+          </nav>
         </header>
 
         <Switch>
@@ -39,6 +60,18 @@ function App() {
           </Route>
           <Route path="/debug">
             <Debug />
+          </Route>
+          <Route path="/login">
+          <Login 
+              loginState={setLoggedIn}
+              path="login"
+            />
+          </Route>
+          <Route path="/signout">
+            <Login 
+              loginState={setLoggedIn}
+              path="signout"
+            />
           </Route>
           <Route path="/">
             <Home />

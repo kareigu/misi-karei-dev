@@ -10,8 +10,9 @@ module.exports = function (db) {
 
   const quoteRoutes = require('./routes/quotes') (quotes, router);
   const niiloRoutes = require('./routes/niilo') (niilo, router);
+  const loginRoutes = require('./routes/login') (router);
 
-  router.use('/', [quoteRoutes, niiloRoutes]);
+  router.use('/', [quoteRoutes, niiloRoutes, loginRoutes]);
 
   return router;
 }

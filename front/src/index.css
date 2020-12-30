@@ -12,3 +12,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.adminPanels {
+  position: relative;
+  padding-left: 500px;
+}

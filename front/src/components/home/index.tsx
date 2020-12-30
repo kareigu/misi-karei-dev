@@ -3,7 +3,7 @@ import './Home.css';
 import Logo from '../../temp.gif'
 
 function perms() {
-  localStorage.setItem('token', 'asdasda');
+  console.log('deprecated');
 }
 
 function Home() {

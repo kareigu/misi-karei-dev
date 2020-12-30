@@ -11,7 +11,7 @@ interface props {
 function QuoteList(props: props) {
   const service = GetFullQuoteList(props.source);
   const [list, setList] = useState<Array<JSX.Element>>();
-  const [searchTerm, setSearchTerm] = useState('');
+  //const [searchTerm, setSearchTerm] = useState('');
   const [pageCount, setPageCount] = useState(1);
   const [finalPage, setFinalPage] = useState(1);
 
@@ -39,7 +39,7 @@ function QuoteList(props: props) {
     }
     
     setList(tempArr);
-  }, [service, searchTerm, pageCount, props.source]);
+  }, [service, pageCount, props.source]);
 
   return (
     <div>
