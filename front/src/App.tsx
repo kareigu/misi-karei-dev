@@ -12,6 +12,7 @@ import Niilo from './components/niilo';
 import Home from './components/home';
 import Debug from './components/debug';
 import Login from './components/Login';
+import Tools from './components/Tools';
 
 import NavButton from './components/NavButtons';
 
@@ -44,6 +45,9 @@ function App() {
           </nav>
 
           <nav className="adminPanels">
+            { loggedIn &&
+              <NavButton to="tools" text="tools" />
+            }
             <NavButton 
               to={loggedIn ? 'signout' : 'login'} 
               text={loggedIn ? 'Sign out' : 'Login'} 
@@ -72,6 +76,9 @@ function App() {
               loginState={setLoggedIn}
               path="signout"
             />
+          </Route>
+          <Route path="/tools">
+            <Tools />
           </Route>
           <Route path="/">
             <Home />
