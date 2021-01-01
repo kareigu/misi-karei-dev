@@ -6,11 +6,11 @@ type loginResponse = {
   success: boolean
 }
 
-const checkLogin = (token: String) => {
+const useCheckLogin = (token: String) => {
 
   const reqPath = process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath;
 
-  return fetch(`${reqPath}login`,
+    return fetch(`${reqPath}login`,
     {
       method: 'POST',
       mode: 'cors',
@@ -34,4 +34,4 @@ const checkLogin = (token: String) => {
     });
 }
 
-export default checkLogin;
+export default useCheckLogin;

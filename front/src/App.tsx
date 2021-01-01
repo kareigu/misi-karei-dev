@@ -13,6 +13,7 @@ import Home from './components/home';
 import Debug from './components/debug';
 import Login from './components/Login';
 import Tools from './components/Tools';
+import Misc from './components/misc';
 
 import NavButton from './components/NavButtons';
 
@@ -26,9 +27,13 @@ function App() {
       return '';
   }
 
-  checkLogin(token(localStorage.getItem('token')))
+  React.useEffect(() => {
+    checkLogin(token(localStorage.getItem('token')))
             .then(val => setLoggedIn(val));
+  })
+  
   const [loggedIn, setLoggedIn] = useState(false);
+
 
   return (
     <Router>
@@ -41,6 +46,7 @@ function App() {
               <NavButton to="/" text="Home" />
               <NavButton to="quotes" text="Quotes" />
               <NavButton to="niilo" text="Niilo" />
+              <NavButton to="misc" text="Misc" />
             </ul>
           </nav>
 
@@ -56,33 +62,45 @@ function App() {
         </header>
 
         <Switch>
+
           <Route path="/quotes">
             <Quotes />
           </Route>
+
           <Route path="/niilo">
             <Niilo />
           </Route>
+
           <Route path="/debug">
             <Debug />
           </Route>
+
           <Route path="/login">
-          <Login 
+            <Login 
               loginState={setLoggedIn}
               path="login"
             />
           </Route>
+
           <Route path="/signout">
             <Login 
               loginState={setLoggedIn}
               path="signout"
             />
           </Route>
+
           <Route path="/tools">
             <Tools />
           </Route>
+
+          <Route path="/misc">
+            <Misc />
+          </Route>
+
           <Route path="/">
             <Home />
           </Route>
+
         </Switch>
       </div>
     </Router>

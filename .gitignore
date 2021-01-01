@@ -4,3 +4,4 @@ dist/
 .env
 backups/
 front/node_modules
+files/
