@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import paths from '../../utils/paths.json';
 
+import NavButton from '../NavButtons';
+
 const reqPath = process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath;
 
 type channel = 'ahha' | 'botspam';
@@ -11,9 +13,11 @@ type response = {
 function StreamNotify() {
   const [channel, setChannel] = useState<channel>('ahha');
   const [status, setStatus] = useState('');
+  const [fetching, setFetching] = useState(false);
 
   function handleSubmit() {
     setStatus('Fetching YouTube API');
+    setFetching(true);
     const token = localStorage.getItem('token');
     fetch(`${reqPath}tools/notify`,
       {
@@ -28,21 +32,25 @@ function StreamNotify() {
       .then(res => res.json())
       .then((json: response) => {
         setStatus(json.msg);
+        setFetching(false);
         console.log(json);
       });
   }
 
   return (
     <div>
-      <label>Select channel </label>
-      <button 
+      <label>Select channel: </label>
+      <NavButton 
+        text={channel.toUpperCase()}
         onClick={() => setChannel(channel === 'ahha' ? 'botspam' : 'ahha')}
-      >
-        {channel.toUpperCase()}
-      </button>
+      />
       <h1>Send stream notification</h1>
 
-      <button onClick={handleSubmit}>Striimi live!</button>
+      <NavButton 
+        text="Striimi live!"
+        onClick={handleSubmit}
+        active={fetching}
+      />
 
       { status !== '' &&
         <h2>{ status }</h2>
