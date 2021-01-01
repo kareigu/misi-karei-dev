@@ -12,7 +12,7 @@ type response = {
 
 function StreamNotify() {
   const [channel, setChannel] = useState<channel>('ahha');
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState('-');
   const [fetching, setFetching] = useState(false);
 
   function handleSubmit() {
@@ -52,9 +52,7 @@ function StreamNotify() {
         active={fetching}
       />
 
-      { status !== '' &&
-        <h2>{ status }</h2>
-      }
+      <h2>{ status }</h2>
     </div>
   )
 }
