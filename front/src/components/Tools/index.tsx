@@ -1,6 +1,7 @@
 import React from 'react';
 
 import StreamNotify from '../StreamNotify';
+import './Tools.css';
 
 
 
@@ -8,8 +9,12 @@ function Tools() {
 
   return (
     <div>
-      <h1>Tools</h1>
-      <StreamNotify />
+      <header className="Misc-header">
+        <h2>Tools</h2>
+      </header>
+      <div className="streamNtf">
+        <StreamNotify />
+      </div>
     </div>
   )
 }
