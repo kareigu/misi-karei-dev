@@ -1,7 +1,6 @@
-import React, { useMemo, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Chart } from 'react-charts';
 
-import test from './test.json';
 import paths from '../../utils/paths.json';
 
 const reqPath = process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath;
