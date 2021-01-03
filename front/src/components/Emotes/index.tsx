@@ -40,7 +40,7 @@ function Emotes() {
   }, [])
 
   return (
-    <div>
+    <div style={{color:'white'}}>
       <h1>Emotes</h1>
       { loading &&
         <h2>Loading...</h2>
