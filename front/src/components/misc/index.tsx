@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from 'react';
+import React, { useState, Suspense, useEffect } from 'react';
 
 import NavButton from '../NavButtons';
 
@@ -24,10 +24,14 @@ const Emotes = React.lazy(() => import('../Emotes'));
 
 function Misc() {
 
-  const location = convertToValidHash();
-  console.log(location);
   
-  const [active, setActive] = useState<LocHash>(location);
+  
+  const [active, setActive] = useState<LocHash>('timeout');
+
+
+  useEffect(() => {
+    setActive(convertToValidHash());
+  }, [active])
 
   return(
     <div>

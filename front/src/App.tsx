@@ -29,12 +29,14 @@ function App() {
       return '';
   }
 
+  
+  
+  const [loggedIn, setLoggedIn] = useState(false);
+
   React.useEffect(() => {
     checkLogin(token(localStorage.getItem('token')))
             .then(val => setLoggedIn(val));
-  })
-  
-  const [loggedIn, setLoggedIn] = useState(false);
+  }, [])
 
 
   return (
