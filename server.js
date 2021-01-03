@@ -19,7 +19,9 @@ const PORT = process.env.PORT;
 const app = express();
 app.use(cors());
 app.use(compression());
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: false
+}));
 app.use(morgan('common'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
