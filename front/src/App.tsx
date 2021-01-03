@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -7,19 +7,21 @@ import {
 import logo from './temp.gif';
 import './App.css';
 
-import Quotes from './components/quotes';
-import Niilo from './components/niilo';
-import Home from './components/home';
-import Debug from './components/debug';
-import Login from './components/Login';
-import Tools from './components/Tools';
-import Misc from './components/misc';
 
 import NavButton from './components/NavButtons';
-
 import checkLogin from './utils/Login';
 
+const Quotes = React.lazy(() => import('./components/quotes'));
+const Niilo = React.lazy(() => import('./components/niilo'));
+const Home = React.lazy(() => import('./components/home'));
+const Debug = React.lazy(() => import('./components/debug'));
+const Login = React.lazy(() => import('./components/Login'));
+const Tools = React.lazy(() => import('./components/Tools'));
+const Misc = React.lazy(() => import('./components/misc'));
+
 function App() {
+  const renderLoad = (<h2>Loading...</h2>);
+
   const token = (token: String | null) => {
     if(token)
       return token;
@@ -64,41 +66,57 @@ function App() {
         <Switch>
 
           <Route path="/quotes">
-            <Quotes />
+            <Suspense fallback={renderLoad}>
+              <Quotes />
+            </Suspense>
           </Route>
 
           <Route path="/niilo">
-            <Niilo />
+            <Suspense fallback={renderLoad}>
+              <Niilo />
+            </Suspense>
           </Route>
 
           <Route path="/debug">
-            <Debug />
+            <Suspense fallback={renderLoad}>
+              <Debug />
+            </Suspense>
           </Route>
 
           <Route path="/login">
-            <Login 
-              loginState={setLoggedIn}
-              path="login"
-            />
+            <Suspense fallback={renderLoad}>
+              <Login 
+                loginState={setLoggedIn}
+                path="login"
+              />
+            </Suspense>
           </Route>
 
           <Route path="/signout">
-            <Login 
-              loginState={setLoggedIn}
-              path="signout"
-            />
+            <Suspense fallback={renderLoad}>
+              <Login 
+                loginState={setLoggedIn}
+                path="signout"
+              />
+            </Suspense>
           </Route>
 
           <Route path="/tools">
-            <Tools />
+            <Suspense fallback={renderLoad}>
+              <Tools />
+            </Suspense>
           </Route>
 
           <Route path="/misc">
-            <Misc />
+            <Suspense fallback={renderLoad}>
+              <Misc />
+            </Suspense>
           </Route>
 
           <Route path="/">
-            <Home />
+            <Suspense fallback={renderLoad}>
+              <Home />
+            </Suspense>
           </Route>
 
         </Switch>
