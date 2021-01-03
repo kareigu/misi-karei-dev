@@ -1,4 +1,7 @@
 const express = require('express');
+const compression = require('compression');
+const helmet = require('helmet');
+const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const fs = require('fs');
@@ -15,6 +18,9 @@ const PORT = process.env.PORT;
 
 const app = express();
 app.use(cors());
+app.use(compression());
+app.use(helmet());
+app.use(morgan('common'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
