@@ -37,7 +37,7 @@ function Emotes() {
         setContents(json);
         setLoading(false);
       });
-  })
+  }, [])
 
   return (
     <div>
