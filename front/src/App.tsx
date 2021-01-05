@@ -25,9 +25,16 @@ function App() {
   const renderLoad = (<h2 style={{color: 'white'}}>Loading...</h2>);
 
   useEffect(() => {
-    checkLogin();
+    checkLogin()
+      .then(res => {
+        setPermissionLevel(res.permission);
+        setLoggedIn(res.logged);
+      })
   }, [])
 
+
+  const [permissionLevel, setPermissionLevel] = useState(0);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   return (
     <Router>
@@ -45,10 +52,23 @@ function App() {
           </nav>
 
           <nav className="adminPanels">
-            <NavButton to="tools" text="tools" />
-            <a href={LoginURL}>
-              <NavButton text="login" />
-            </a>
+            { permissionLevel >= 5 &&
+              <NavButton to="tools" text="tools" />
+            }
+
+            { !loggedIn &&
+              <a href={LoginURL}>
+                <NavButton text="login" />
+              </a>
+            }
+
+            { loggedIn &&
+              <NavButton to="signout" text="sign out" />
+            }
+            
+            <p>
+              {permissionLevel}
+            </p>
           </nav>
         </header>
 

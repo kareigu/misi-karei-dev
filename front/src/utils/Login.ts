@@ -16,7 +16,7 @@ const useCheckLogin = () => {
       });
     }
     else
-      return 'no-token';
+      return JSON.stringify({token_type: 'no-token'});
   }
 
   return fetch(`${reqPath}OAuth`,
@@ -30,7 +30,27 @@ const useCheckLogin = () => {
     body: access_token()
   })
   .then(res => res.json())
-  .then(json => console.log(json));
+  .then(json => {
+    if(json.code) {
+      console.warn(json);
+      return {
+        logged: false,
+        permission: 0
+      }
+    } else {
+      localStorage.setItem('userData', JSON.stringify(json));
+      if(typeof json.permissionLevel === 'number')
+        return {
+          logged: true,
+          permission: json.permissionLevel
+        }
+      else
+        return {
+          logged: true,
+          permission: 0
+        }
+    }
+  });
 }
 
 export default useCheckLogin;

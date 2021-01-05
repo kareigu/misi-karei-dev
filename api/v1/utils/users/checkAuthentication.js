@@ -11,6 +11,8 @@ module.exports = async function(db, data) {
     }
   }
 
+  console.log(data.access_token);
+  
   if(!data.access_token) {
     const status = {
       code: 'no-token',

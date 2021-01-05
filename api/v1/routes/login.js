@@ -105,7 +105,16 @@ module.exports = function(db, router) {
   });
 
   router.post('/OAuth', async (req, res) => {
-    res.send(await checkAuthentication(db, req.body));
+    const discordInfo = await checkAuthentication(db, req.body);
+
+    if(discordInfo.status)
+      res.send(discordInfo.status);
+    else {
+      const { permissionLevel, access_token } = await db.findOne({id: discordInfo.id});
+      discordInfo.permissionLevel = permissionLevel;
+      discordInfo.access_token = access_token;
+      res.send(discordInfo);
+    }
   }); 
 
   return router;
