@@ -50,6 +50,11 @@ function Login(props: props) {
           }
           
         });
+    } else {
+      localStorage.removeItem('userData');
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 1500);
     }
   }, [props.path]);
 
@@ -77,7 +82,7 @@ function Login(props: props) {
       {
         props.path === 'signout' &&
         <div>
-          <h1>Signout</h1>
+          <h1>Signed out</h1>
         </div>
       }
       
