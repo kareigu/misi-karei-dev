@@ -6,6 +6,7 @@ const purgeUsers = require('../utils/users/purgeUsers.js');
 const checkAuthentication = require('../utils/users/checkAuthentication.js');
 const getUserList = require('../utils/users/getUserList.js');
 const updateUserPerms = require('../utils/users/updateUserPerms.js');
+const checkPermissions = require('../utils/users/checkPermissions');
 
 
 const discordAPI = require('../utils/consts/discordAPI.js');
@@ -43,8 +44,15 @@ module.exports = function(db, router) {
   })
 
   router.delete('/login/users', async (req, res) => {
-    const dbResponse = await purgeUsers(db);
-    res.send(dbResponse);
+    const hasPermission = await checkPermissions(db, req.headers.authorization, 5);
+
+    if(hasPermission) {
+      const dbResponse = await purgeUsers(db);
+      res.send({message: 'deleted all users'});
+    } else {
+      res.send({message: 'Invalid permissions'});
+    }
+    
   });
 
   router.get('/OAuth', async (req, res) => {
