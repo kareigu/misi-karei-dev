@@ -65,10 +65,6 @@ function App() {
             { loggedIn &&
               <NavButton to="signout" text="sign out" />
             }
-            
-            <p>
-              {permissionLevel}
-            </p>
           </nav>
         </header>
 
