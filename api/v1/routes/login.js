@@ -5,6 +5,7 @@ const putProfile = require('../utils/users/putProfile');
 const purgeUsers = require('../utils/users/purgeUsers.js');
 const checkAuthentication = require('../utils/users/checkAuthentication.js');
 const getUserList = require('../utils/users/getUserList.js');
+const updateUserPerms = require('../utils/users/updateUserPerms.js');
 
 
 const discordAPI = require('../utils/consts/discordAPI.js');
@@ -36,6 +37,10 @@ module.exports = function(db, router) {
   router.get('/login/users', async (req, res) => {
     res.send(await getUserList(db));
   });
+
+  router.post('/login/users', async (req, res) => {
+    res.send(await updateUserPerms(db, req.body));
+  })
 
   router.delete('/login/users', async (req, res) => {
     const dbResponse = await purgeUsers(db);
