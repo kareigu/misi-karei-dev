@@ -9,7 +9,7 @@ module.exports = async function(db, userData) {
     token_type
   } = userData;
 
-  const updatedUser = await db.update({
+  const updatedUser = await db.findOneAndUpdate({
     id: userData.id },
     {
       $set: {

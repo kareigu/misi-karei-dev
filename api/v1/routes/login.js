@@ -64,13 +64,17 @@ module.exports = function(db, router) {
       body: payload
     })
     const tokenData = await data.json();
-    const {token_type, access_token, refresh_token} = tokenData;
+    const { access_token } = tokenData;
 
     if(access_token && access_token !== null) {
-      const discordProfile = await fetchDiscordProfile(db, tokenData);
-      const userProfile = await putProfile(db, discordProfile);
+      const discordProfile = await fetchDiscordProfile(tokenData);
 
-      console.log(userProfile);
+      const fullProfile = discordProfile;
+      fullProfile.access_token = access_token;
+      fullProfile.refresh_token = tokenData.refresh_token;
+      fullProfile.token_type = tokenData.token_type;
+
+      const userProfile = await putProfile(db, fullProfile);
      
       const responseObj = {
         status: {
@@ -81,7 +85,8 @@ module.exports = function(db, router) {
           id: userProfile.id,
           username: userProfile.username,
           avatar: userProfile.avatar,
-          access_token: userProfile.access_token
+          access_token: userProfile.access_token,
+          token_type: userProfile.token_type
         }
       }
 
@@ -100,7 +105,7 @@ module.exports = function(db, router) {
   });
 
   router.post('/OAuth', async (req, res) => {
-    res.send(await checkAuthentication(db, req.body.access_token));
+    res.send(await checkAuthentication(db, req.body));
   }); 
 
   return router;

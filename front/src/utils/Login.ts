@@ -9,7 +9,11 @@ const useCheckLogin = () => {
     const strg = localStorage.getItem('userData');
     if(strg !== null) {
       const json = JSON.parse(strg);
-      return JSON.stringify({access_token: json.access_token});
+      return JSON.stringify({
+        access_token: json.access_token,
+        token_type: json.token_type,
+        id: json.id
+      });
     }
     else
       return 'no-token';
