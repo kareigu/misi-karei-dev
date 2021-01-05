@@ -43,8 +43,16 @@ function Login(props: props) {
                 avatar: userData.avatar
               });
               setLoading(false);
+
+              setTimeout(() => {
+                window.location.href = '/';
+              }, 1000);
             }
           } else {
+            setUserInfo({
+              username: 'Error',
+              avatar: 'https://mxrr.dev/files/lmao.gif'
+            })
             console.warn(json.status);
             setLoading(false);
           }
