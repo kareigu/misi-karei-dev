@@ -1,37 +1,32 @@
 import paths from './paths.json';
 
-type loginResponse = {
-  token: string,
-  msg: string,
-  success: boolean
-}
 
-const useCheckLogin = (token: String) => {
+const useCheckLogin = () => {
 
   const reqPath = process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath;
 
-    return fetch(`${reqPath}login`,
-    {
-      method: 'POST',
-      mode: 'cors',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ token })
-    })
-    .then(res => res.json())
-    .then((json: loginResponse) => {
-      if(json.success) {
-        localStorage.setItem('token', json.token);
-        console.log(json.msg);
-        return true;
-      } else {
-        localStorage.removeItem('token');
-        console.log(json.msg);
-        return false;
-      }
-    });
+  const access_token = () => {
+    const strg = localStorage.getItem('userData');
+    if(strg !== null) {
+      const json = JSON.parse(strg);
+      return JSON.stringify({access_token: json.access_token});
+    }
+    else
+      return 'no-token';
+  }
+
+  return fetch(`${reqPath}OAuth`,
+  {
+    method: 'POST',
+    mode: 'cors',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: access_token()
+  })
+  .then(res => res.json())
+  .then(json => console.log(json));
 }
 
 export default useCheckLogin;

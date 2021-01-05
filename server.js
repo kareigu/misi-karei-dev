@@ -12,7 +12,6 @@ require('dotenv').config({ path: path.join(__dirname, '.env') });
 global.appRoot = path.resolve(__dirname);
 
 const db = require('monk')(process.env.DB_URL);
-const users = db.get('users');
 
 const PORT = process.env.PORT;
 
@@ -22,7 +21,7 @@ app.use(compression());
 app.use(helmet({
   contentSecurityPolicy: false
 }));
-app.use(morgan('common'));
+app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 

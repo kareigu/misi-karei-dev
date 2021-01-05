@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from 'react';
+import React, { useState, Suspense, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -19,23 +19,13 @@ const Login = React.lazy(() => import('./components/Login'));
 const Tools = React.lazy(() => import('./components/Tools'));
 const Misc = React.lazy(() => import('./components/misc'));
 
+const LoginURL = 'https://discord.com/api/oauth2/authorize?client_id=796036924518694935&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Flogin&response_type=code&scope=identify';
+
 function App() {
-  const renderLoad = (<h2>Loading...</h2>);
+  const renderLoad = (<h2 style={{color: 'white'}}>Loading...</h2>);
 
-  const token = (token: String | null) => {
-    if(token)
-      return token;
-    else
-      return '';
-  }
-
-  
-  
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  React.useEffect(() => {
-    checkLogin(token(localStorage.getItem('token')))
-            .then(val => setLoggedIn(val));
+  useEffect(() => {
+    checkLogin();
   }, [])
 
 
@@ -55,13 +45,10 @@ function App() {
           </nav>
 
           <nav className="adminPanels">
-            { loggedIn &&
-              <NavButton to="tools" text="tools" />
-            }
-            <NavButton 
-              to={loggedIn ? 'signout' : 'login'} 
-              text={loggedIn ? 'Sign out' : 'Login'} 
-            />
+            <NavButton to="tools" text="tools" />
+            <a href={LoginURL}>
+              <NavButton text="login" />
+            </a>
           </nav>
         </header>
 
@@ -88,7 +75,6 @@ function App() {
           <Route path="/login">
             <Suspense fallback={renderLoad}>
               <Login 
-                loginState={setLoggedIn}
                 path="login"
               />
             </Suspense>
@@ -97,7 +83,6 @@ function App() {
           <Route path="/signout">
             <Suspense fallback={renderLoad}>
               <Login 
-                loginState={setLoggedIn}
                 path="signout"
               />
             </Suspense>
