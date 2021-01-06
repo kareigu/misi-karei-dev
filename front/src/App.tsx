@@ -74,13 +74,13 @@ function App() {
 
           <Route path="/quotes">
             <Suspense fallback={renderLoad}>
-              <Quotes />
+              <Quotes permLevel={permissionLevel} />
             </Suspense>
           </Route>
 
           <Route path="/niilo">
             <Suspense fallback={renderLoad}>
-              <Niilo />
+              <Niilo permLevel={permissionLevel} />
             </Suspense>
           </Route>
 

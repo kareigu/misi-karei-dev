@@ -5,7 +5,8 @@ import QuoteBlock from '../QuoteBlock';
 import PageSwitcher from '../PageSwitcher';
 
 interface props {
-  source: 'quotes' | 'niilo'
+  source: 'quotes' | 'niilo',
+  permLevel: number
 }
 
 function QuoteList(props: props) {
@@ -28,7 +29,7 @@ function QuoteList(props: props) {
               key={quote._id} 
               text={quote.text} 
               number={quote.number}
-              usertype="admin"
+              usertype={props.permLevel}
               origin={props.source}
             />
           )
@@ -39,7 +40,7 @@ function QuoteList(props: props) {
     }
     
     setList(tempArr);
-  }, [service, pageCount, props.source]);
+  }, [service, pageCount, props.source, props.permLevel]);
 
   return (
     <div>

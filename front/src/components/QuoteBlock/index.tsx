@@ -8,7 +8,7 @@ import parseAccessToken from '../../utils/parseAccessToken';
 type values = {
   text: string,
   number: number,
-  usertype: 'normal' | 'moderator' | 'vip',
+  usertype: number,
   origin: 'quotes' | 'niilo'
 }
 
@@ -26,7 +26,7 @@ function QuoteBlock(props: values) {
       background   : '#1c1e24',
       borderRadius : '5px',
       width        : '300px',
-      height       : props.usertype !== 'normal' ? '150px' : '80px',
+      height       : props.usertype >= 3 ? '150px' : '80px',
       maxWidth     : '300px',
       overflowx     : 'hidden'
     }
@@ -153,7 +153,7 @@ function QuoteBlock(props: values) {
           </div>
         }
 
-        { props.usertype === 'vip' || props.usertype === 'moderator' &&
+        { props.usertype >= 3 &&
           <div>
             {isEditing 
               ? (<div>
@@ -162,7 +162,7 @@ function QuoteBlock(props: values) {
               </div>)
               : <h3 onClick={() => setEditing(true)} id="editButton" className="adminButtons">Edit</h3>}
             <h3 id="adminMsg" className="adminButtons">{adminMsg}</h3>
-            { props.usertype === 'moderator' &&
+            { props.usertype >= 4 &&
               <h3 onClick={removeQuote} id="removeButton" className="adminButtons">Remove</h3>
             }
           </div>

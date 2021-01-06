@@ -2,9 +2,13 @@ import React from 'react';
 import './Niilo.css';
 import QuoteList from '../QuoteList';
 
-function Niilo() {
+interface Props {
+  permLevel: number
+}
+
+function Niilo(props: Props) {
   return (
-    <QuoteList source="niilo" />
+    <QuoteList source="niilo" permLevel={props.permLevel} />
   );
 }
 
