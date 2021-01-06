@@ -5,17 +5,18 @@ const removeContent = require('../utils/removeContent');
 const saveBackup = require('../utils/saveBackup');
 const loadBackup = require('../utils/loadBackup');
 const editContent = require('../utils/editContent');
+const checkPermissions = require('../utils/users/checkPermissions');
 
-module.exports = function (db, router) {
-  router.post('/quotes', (req, res) => {
-    if(checkAuth(req.headers.authorization)) {
+module.exports = function (db, router, usersDB) {
+
+  router.post('/quotes', async (req, res) => {
+    if(await checkPermissions(usersDB, req.headers.authorization, 3)) {
       addContent(db, req.body).then(data => {
         console.log(data);
         res.status(201);
         res.send(data);
       });
     } else {
-      res.status(401);
       res.send({"Unauthorized": "Invalid token"});
     }
   });
