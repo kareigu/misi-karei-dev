@@ -17,20 +17,19 @@ module.exports = function (db, router, usersDB) {
         res.send(data);
       });
     } else {
-      res.send({"Unauthorized": "Invalid token"});
+      res.send({message: "Invalid permissions"});
     }
   });
 
-  router.post('/quotes/backup', (req, res) => {
-    if(checkAuth(req.headers.authorization)) {
+  router.post('/quotes/backup', async (req, res) => {
+    if(await checkPermissions(usersDB, req.headers.authorization, 5)) {
       loadBackup(db, req.body).then(response => {
         console.log(req.body);
         res.status(response.status);
         res.send(response.message);
       });
     } else {
-      res.status(401);
-      res.send({"Unauthorized": "Invalid token"});
+      res.send({message: "Invalid permissions"});
     }
   });
   
@@ -50,29 +49,27 @@ module.exports = function (db, router, usersDB) {
     });
   });
 
-  router.delete('/quotes', (req, res) => {
-    if(checkAuth(req.headers.authorization)) {
+  router.delete('/quotes', async (req, res) => {
+    if(await checkPermissions(usersDB, req.headers.authorization, 4)) {
       removeContent(db, req.body.id).then(data => {
         console.log(data);
         res.status(200);
         res.send(data);
       });
     } else {
-      res.status(401);
-      res.send({"Unauthorized": "Invalid token"});
+      res.send({message: "Invalid permissions"});
     }
   });
 
-  router.put('/quotes', (req, res) => {
-    if(checkAuth(req.headers.authorization)) {
+  router.put('/quotes', async (req, res) => {
+    if(await checkPermissions(usersDB, req.headers.authorization, 3)) {
       editContent(db, req.body).then(data => {
         console.log(data);
         res.status(201);
         res.send(data);
       });
     } else {
-      res.status(401);
-      res.send({"Unauthorized": "Invalid token"});
+      res.send({message: "Invalid permissions"});
     }
   });
 

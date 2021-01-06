@@ -10,7 +10,7 @@ module.exports = function (db) {
   const users = db.get('users');
 
   const quoteRoutes = require('./routes/quotes') (quotes, router, users);
-  const niiloRoutes = require('./routes/niilo') (niilo, router);
+  const niiloRoutes = require('./routes/niilo') (niilo, router, users);
   const loginRoutes = require('./routes/login') (users, router);
   const toolRoutes = require('./routes/tools') (users, router);
 
