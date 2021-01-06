@@ -12,7 +12,11 @@ type UserList = [
   }
 ]
 
-function UserList() {
+interface Props {
+  permLevel: number
+}
+
+function UserList(props: Props) {
 
   const [userList, setUserlist] = useState<UserList>()
   const [loading, setLoading] = useState(true);
@@ -74,13 +78,15 @@ function UserList() {
             <td><img src={el.avatar} alt={el.id} width="50%" height="50%" /></td>
             <td>{el.username}</td>
             <td>{getPermissionName(el.permissionLevel)}</td>
-            { el.permissionLevel < 5 &&
-              <td
-                onClick={() => upgradePermissions(el.permissionLevel + 1, el.id)}
-              >
-                To {getPermissionName(el.permissionLevel + 1)}
-              </td>
+            { props.permLevel >= 5 &&
+              el.permissionLevel < 5 &&
+                <td
+                  onClick={() => upgradePermissions(el.permissionLevel + 1, el.id)}
+                >
+                  To {getPermissionName(el.permissionLevel + 1)}
+                </td>
             }
+            
           </tr>
         ))
       )
@@ -120,7 +126,9 @@ function UserList() {
                 <th>Avatar</th>
                 <th>Name</th>
                 <th>Permission Level</th>
-                <th>Promote</th>
+                { props.permLevel >= 5 &&
+                  <th>Promote</th>
+                }
               </tr>
             </thead>
             <tbody>

@@ -21,7 +21,7 @@ function Tools(props: Props) {
         </div>
       }
       <div className="userList">
-        <UserList />
+        <UserList permLevel={props.permLevel} />
       </div>
     </div>
   )
