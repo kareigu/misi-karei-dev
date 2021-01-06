@@ -40,6 +40,21 @@ module.exports = function (db, router, usersDB) {
     });
   });
 
+  router.get('/quotes/add', async (req, res) => {
+    if(checkAuth(req.query.secret)) {
+      if(req.query.text && req.query.text !== '') {
+        const data = await addContent(db, {text: req.query.text});
+        console.log(data);
+        res.status(201);
+        res.send(`Added new quote #${data.number}`);
+      } else {
+        res.send('Cannot add empty quote');
+      }
+    } else {
+      res.send('Invalid permissions');
+    }
+  });
+
   router.get('/quotes/backup', (req, res) => {
     saveBackup(db).then(file => {
       res.status(200);
