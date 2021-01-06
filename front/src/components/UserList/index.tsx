@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import parseAccessToken from '../../utils/parseAccessToken';
+
 import paths from '../../utils/paths.json';
 const reqPath = process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath;
 
@@ -27,12 +29,8 @@ function UserList(props: Props) {
 
 
     const upgradePermissions = (n: number, id: string, index: number) => {
-      const storage = localStorage.getItem('userData');
-
-      let token = '';
-
-      if(storage !== null)
-        token = JSON.parse(storage).access_token;
+      
+      const token = parseAccessToken();
 
       setStatus('Promoting')
 
