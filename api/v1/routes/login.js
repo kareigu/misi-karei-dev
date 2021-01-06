@@ -129,10 +129,16 @@ module.exports = function(db, router) {
     if(discordInfo.status)
       res.send(discordInfo.status);
     else {
-      const { permissionLevel, access_token } = await db.findOne({id: discordInfo.id});
-      discordInfo.permissionLevel = permissionLevel;
-      discordInfo.access_token = access_token;
-      res.send(discordInfo);
+      try {
+        const { permissionLevel, access_token } = await db.findOne({id: discordInfo.id});
+        discordInfo.permissionLevel = permissionLevel;
+        discordInfo.access_token = access_token;
+        res.send(discordInfo);
+      } catch (err) {
+        console.error(err);
+        res.send({message: 'No valid user found in database'});
+      }
+      
     }
   }); 
 
