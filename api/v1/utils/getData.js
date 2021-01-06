@@ -12,8 +12,9 @@ module.exports = async function(db, params) {
       output = await searchQuote(db, params.search);
     }
 
+
     if(!output)
-      output = {text: `Èrror: invalid quote - ${params.query}`};
+      output = {text: `Èrror: invalid quote - ${params.search}`};
 
     if(params.raw === 'true') {
       return output.text;
