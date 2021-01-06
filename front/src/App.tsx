@@ -86,7 +86,7 @@ function App() {
 
           <Route path="/debug">
             <Suspense fallback={renderLoad}>
-              <Debug />
+              <Debug permLevel={permissionLevel} />
             </Suspense>
           </Route>
 
