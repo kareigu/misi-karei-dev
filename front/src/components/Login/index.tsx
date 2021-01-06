@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import checkLogin from '../../utils/Login';
 import { UserInfo } from '../../utils/types/UserInfo';
 
 import paths from '../../utils/paths.json';
