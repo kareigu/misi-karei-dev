@@ -7,6 +7,7 @@ const cors = require('cors');
 const fs = require('fs');
 const https = require('https');
 const path = require('path');
+const sites = require('./sites.js');
 
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 global.appRoot = path.resolve(__dirname);
@@ -34,11 +35,11 @@ const apiv1 = require('./api/v1/apiv1') (db);
 app.use('/api/v1', apiv1);
 
 app.use('/', express.static('./dist'));
-app.get('/:var(quotes|niilo|debug|misc|login|tools)?', (req, res) => {
+app.get(`/:var(${sites.valid})?`, (req, res) => {
   res.sendFile(`${__dirname}/dist/index.html`)
 });
 
 const httpsServer = https.createServer(certs, app);
 httpsServer.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 //app.listen(PORT);
-console.log(`Listening on port ${PORT}`);
+//console.log(`Listening on port ${PORT}`);
