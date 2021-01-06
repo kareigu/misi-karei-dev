@@ -7,6 +7,8 @@ import {
 import logo from './temp.gif';
 import './App.css';
 
+import paths from './utils/paths.json';
+
 
 import NavButton from './components/NavButtons';
 import checkLogin from './utils/Login';
@@ -19,7 +21,7 @@ const Login = React.lazy(() => import('./components/Login'));
 const Tools = React.lazy(() => import('./components/Tools'));
 const Misc = React.lazy(() => import('./components/misc'));
 
-const LoginURL = 'https://discord.com/api/oauth2/authorize?client_id=796036924518694935&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Flogin&response_type=code&scope=identify';
+const LoginURL = process.env.NODE_ENV === 'development' ? paths.devOAuth : paths.productionOAuth;
 
 function App() {
   const renderLoad = (<h2 style={{color: 'white'}}>Loading...</h2>);
