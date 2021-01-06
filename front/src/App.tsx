@@ -108,7 +108,7 @@ function App() {
 
           <Route path="/tools">
             <Suspense fallback={renderLoad}>
-              <Tools />
+              <Tools permLevel={permissionLevel} />
             </Suspense>
           </Route>
 

@@ -4,18 +4,22 @@ import StreamNotify from '../StreamNotify';
 import UserList from '../UserList';
 import './Tools.css';
 
+interface Props {
+  permLevel: number
+}
 
-
-function Tools() {
+function Tools(props: Props) {
 
   return (
     <div>
       <header className="Misc-header">
         <h2>Tools</h2>
       </header>
-      <div className="streamNtf">
-        <StreamNotify />
-      </div>
+      { props.permLevel > 3 &&
+        <div className="streamNtf">
+          <StreamNotify />
+        </div>
+      }
       <div className="userList">
         <UserList />
       </div>
