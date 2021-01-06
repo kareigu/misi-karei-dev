@@ -9,7 +9,8 @@ module.exports = async function(db, searchParam) {
     }
     return res[0];
   } else {
-    const res = await db.find({text : {$regex : searchParam}});
+    const regex = RegExp(`.*${searchParam}.*`, 'i');
+    const res = await db.find({ text : regex });
     const idx = getRandomIndex(res.length - 1);
     return res[idx];
   }
