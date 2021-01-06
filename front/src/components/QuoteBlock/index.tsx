@@ -3,11 +3,12 @@ import Modal from 'react-modal'
 import useFitText from 'use-fit-text'
 import './QuoteBlock.css';
 import paths from '../../utils/paths.json';
+import parseAccessToken from '../../utils/parseAccessToken';
 
 type values = {
   text: string,
   number: number,
-  usertype: 'normal' | 'admin',
+  usertype: 'normal' | 'moderator' | 'vip',
   origin: 'quotes' | 'niilo'
 }
 
@@ -25,7 +26,7 @@ function QuoteBlock(props: values) {
       background   : '#1c1e24',
       borderRadius : '5px',
       width        : '300px',
-      height       : props.usertype === 'admin' ? '150px' : '80px',
+      height       : props.usertype !== 'normal' ? '150px' : '80px',
       maxWidth     : '300px',
       overflowx     : 'hidden'
     }
@@ -62,7 +63,7 @@ function QuoteBlock(props: values) {
       {
         method: 'DELETE',
         headers: {
-          'Authorization': `${localStorage.getItem('token')}`,
+          'Authorization': `${parseAccessToken()}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
@@ -90,7 +91,7 @@ function QuoteBlock(props: values) {
       {
         method: 'PUT',
         headers: {
-          'Authorization': `${localStorage.getItem('token')}`,
+          'Authorization': `${parseAccessToken()}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
@@ -152,7 +153,7 @@ function QuoteBlock(props: values) {
           </div>
         }
 
-        { props.usertype === 'admin' &&
+        { props.usertype === 'vip' || props.usertype === 'moderator' &&
           <div>
             {isEditing 
               ? (<div>
@@ -161,7 +162,9 @@ function QuoteBlock(props: values) {
               </div>)
               : <h3 onClick={() => setEditing(true)} id="editButton" className="adminButtons">Edit</h3>}
             <h3 id="adminMsg" className="adminButtons">{adminMsg}</h3>
-            <h3 onClick={removeQuote} id="removeButton" className="adminButtons">Remove</h3>
+            { props.usertype === 'moderator' &&
+              <h3 onClick={removeQuote} id="removeButton" className="adminButtons">Remove</h3>
+            }
           </div>
         }
           
