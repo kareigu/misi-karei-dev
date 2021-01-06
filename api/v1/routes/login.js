@@ -40,7 +40,12 @@ module.exports = function(db, router) {
   });
 
   router.post('/login/users', async (req, res) => {
-    res.send(await updateUserPerms(db, req.body));
+    const hasPermission = await checkPermissions(db, req.headers.authorization, 5);
+
+    if(hasPermission)
+      res.send(await updateUserPerms(db, req.body));
+    else
+      res.send(['Invalid permissions']);
   })
 
   router.delete('/login/users', async (req, res) => {
