@@ -6,12 +6,16 @@ module.exports = async function(db, params) {
     return db.find().then(res => res);
   } else {
     let output;
-    if(params.search == undefined || params.search === '') {
-      output = await randomQuote(db);
+    if(params.search === '§') {
+      const latest = await db.find({}, {sort: {number: -1}, limit: 1});
+      output = latest[0]
     } else {
-      output = await searchQuote(db, params.search);
+      if(params.search == undefined || params.search === '') {
+        output = await randomQuote(db);
+      } else {
+        output = await searchQuote(db, params.search);
+      }
     }
-
 
     if(!output)
       output = {text: `Èrror: invalid quote - ${params.search}`};
