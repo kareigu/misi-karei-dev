@@ -4,7 +4,7 @@ const checkPermissions = require('../utils/users/checkPermissions');
 
 module.exports = function (users, router) {
   router.post('/tools/notify', (req, res) => {
-    checkPermissions(users, req.headers.authorization, 5)
+    checkPermissions(users, req.headers.authorization, 4)
       .then(hasPermission => {
         if(hasPermission) {
           streamNotification(req.body)

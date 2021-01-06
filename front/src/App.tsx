@@ -54,7 +54,7 @@ function App() {
           </nav>
 
           <nav className="adminPanels">
-            { permissionLevel >= 5 &&
+            { permissionLevel >= 4 &&
               <NavButton to="tools" text="tools" />
             }
 
