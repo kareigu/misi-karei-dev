@@ -65,6 +65,12 @@ function UserList(props: Props) {
 
         case 3:
           return 'VIP'
+
+        case 2:
+          return 'Even better user'
+
+        case 1:
+          return 'Slightly better user'
       
         default:
           return 'Normal user'
