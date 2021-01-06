@@ -28,7 +28,7 @@ function UserList(props: Props) {
   const renderUserList = () => {
 
 
-    const upgradePermissions = (n: number, id: string, index: number) => {
+    const upgradePermissions = (n: number, id: string) => {
       
       const token = parseAccessToken();
 
@@ -81,7 +81,7 @@ function UserList(props: Props) {
 
     if(userList !== undefined) {
       return(
-        userList.map((el, index) => (
+        userList.map(el => (
           <tr key={el.id}>
             <td><img src={el.avatar} alt={el.id} width="50%" height="50%" /></td>
             <td>{el.username}</td>
@@ -89,7 +89,7 @@ function UserList(props: Props) {
             { props.permLevel >= 5 &&
               el.permissionLevel < 5 &&
                 <td
-                  onClick={() => upgradePermissions(el.permissionLevel + 1, el.id, index)}
+                  onClick={() => upgradePermissions(el.permissionLevel + 1, el.id)}
                 >
                   To {getPermissionName(el.permissionLevel + 1)}
                 </td>
