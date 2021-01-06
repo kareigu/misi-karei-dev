@@ -21,11 +21,12 @@ function UserList(props: Props) {
   const [userList, setUserlist] = useState<UserList>()
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState('loading');
+  const [updateList, setUpdateList] = useState(true);
 
   const renderUserList = () => {
 
 
-    const upgradePermissions = (n: number, id: string) => {
+    const upgradePermissions = (n: number, id: string, index: number) => {
       const storage = localStorage.getItem('userData');
 
       let token = '';
@@ -52,7 +53,10 @@ function UserList(props: Props) {
         ])
       })
       .then(res => res.json())
-      .then(json => setStatus(json[0]));
+      .then(json => {
+        setStatus(json[0]);
+        setUpdateList(!updateList);
+      });
     }
 
     const getPermissionName = (n: number) => {
@@ -79,7 +83,7 @@ function UserList(props: Props) {
 
     if(userList !== undefined) {
       return(
-        userList.map(el => (
+        userList.map((el, index) => (
           <tr key={el.id}>
             <td><img src={el.avatar} alt={el.id} width="50%" height="50%" /></td>
             <td>{el.username}</td>
@@ -87,7 +91,7 @@ function UserList(props: Props) {
             { props.permLevel >= 5 &&
               el.permissionLevel < 5 &&
                 <td
-                  onClick={() => upgradePermissions(el.permissionLevel + 1, el.id)}
+                  onClick={() => upgradePermissions(el.permissionLevel + 1, el.id, index)}
                 >
                   To {getPermissionName(el.permissionLevel + 1)}
                 </td>
@@ -114,7 +118,7 @@ function UserList(props: Props) {
         setLoading(false);
         setStatus('Loaded user list');
       });
-  }, []);
+  }, [updateList]);
 
   return(
     <div>
