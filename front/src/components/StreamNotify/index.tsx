@@ -18,16 +18,24 @@ function StreamNotify() {
   function handleSubmit() {
     setStatus('Fetching YouTube API');
     setFetching(true);
-    const token = localStorage.getItem('token');
+
+    const storage = localStorage.getItem('userData');
+
+    let token = '';
+
+    if(storage !== null)
+      token = JSON.parse(storage).access_token;
+    
     fetch(`${reqPath}tools/notify`,
       {
         method: 'POST',
         mode: 'cors',
         credentials: 'same-origin',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': token
         },
-        body: JSON.stringify({ token, hook: channel })
+        body: JSON.stringify({ hook: channel })
       })
       .then(res => res.json())
       .then((json: response) => {
