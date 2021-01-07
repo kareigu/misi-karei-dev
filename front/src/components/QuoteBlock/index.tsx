@@ -5,6 +5,9 @@ import './QuoteBlock.css';
 import paths from '../../utils/paths.json';
 import parseAccessToken from '../../utils/parseAccessToken';
 
+import { IconButton, Tooltip} from '@material-ui/core'
+import { CreateOutlined, DeleteOutlined, SaveOutlined, ClearOutlined } from '@material-ui/icons'
+
 type values = {
   text: string,
   number: number,
@@ -157,13 +160,24 @@ function QuoteBlock(props: values) {
           <div>
             {isEditing 
               ? (<div>
-                <h4 onClick={editQuote} id="saveButton" className="adminButtons">Save</h4>
-                <h4 onClick={() => setEditing(false)} id="cancelButton" className="adminButtons">Cancel</h4>
+
+                <Tooltip title="Save">
+                  <IconButton color="primary" onClick={editQuote} id="saveButton" className="adminButtons"><SaveOutlined /></IconButton>
+                </Tooltip>
+                
+                <Tooltip title="Cancel">
+                  <IconButton color="secondary" onClick={() => setEditing(false)} id="cancelButton" className="adminButtons"><ClearOutlined /></IconButton>
+                </Tooltip>
+                
               </div>)
-              : <h3 onClick={() => setEditing(true)} id="editButton" className="adminButtons">Edit</h3>}
+              : (<Tooltip title="Edit">
+                  <IconButton color="primary" onClick={() => setEditing(true)} id="editButton" className="adminButtons"><CreateOutlined /></IconButton>
+                </Tooltip>)}
             <h3 id="adminMsg" className="adminButtons">{adminMsg}</h3>
             { props.usertype >= 4 &&
-              <h3 onClick={removeQuote} id="removeButton" className="adminButtons">Remove</h3>
+              <Tooltip title="Delete">
+                <IconButton color="secondary" onClick={removeQuote} id="removeButton" className="adminButtons"><DeleteOutlined /></IconButton>
+              </Tooltip>
             }
           </div>
         }
