@@ -93,8 +93,12 @@ function UserList(props: Props) {
       .then(json => {
         console.log(json);
         setUserlist(json);
-        setLoading(false);
-        setStatus('Loaded user list');
+
+        if(loading) {
+          setLoading(false);
+          setStatus('Loaded user list');
+        }
+          
       });
   }, [updateList]);
 
