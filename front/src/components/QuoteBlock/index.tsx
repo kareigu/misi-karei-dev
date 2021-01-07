@@ -126,12 +126,15 @@ function QuoteBlock(props: values) {
         overlayClassName="Overlay"
       >
         <h2 id="modalTitle">#{props.number} </h2>
-        <h1 
-          id="closeButton"
-          onClick={closeModal}
-        >
-        X
-        </h1>
+        <Tooltip title="Close">
+          <IconButton 
+            color="secondary"
+            id="closeButton"
+            onClick={closeModal}
+          >
+            <ClearOutlined />
+          </IconButton>
+        </Tooltip>
         <br></br>
         <div 
           id="modalText"

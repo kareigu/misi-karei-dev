@@ -58,14 +58,8 @@
 #closeButton {
   position: absolute;
   right: 5px;
-  top: -20px;
+  top: 0px;
   color: rgba(255, 0, 76, 0.664);
-  width: 30px;
-  user-select: none;
-}
-
-#closeButton:hover {
-  color:  rgba(255, 0, 76, 1);
 }
 
 .Overlay {
@@ -105,6 +99,8 @@
 }
 
 #editField {
+  position: relative;
+  top: 18px;
   background-color: #2e313b;
   color: white;
   border: 0px;
