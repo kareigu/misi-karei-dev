@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import paths from '../../utils/paths.json';
 
-import NavButton from '../NavButtons';
-
 import { Button, Chip } from '@material-ui/core';
 
 const reqPath = process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath;
