@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Container } from '@material-ui/core'
+
 import StreamNotify from '../StreamNotify';
 import UserList from '../UserList';
 import './Tools.css';
@@ -16,13 +18,13 @@ function Tools(props: Props) {
         <h2>Tools</h2>
       </header>
       { props.permLevel > 3 &&
-        <div className="streamNtf">
+        <Container className="streamNtf">
           <StreamNotify />
-        </div>
+        </Container>
       }
-      <div className="userList">
+      <Container className="userList">
         <UserList permLevel={props.permLevel} />
-      </div>
+      </Container>
     </div>
   )
 }
