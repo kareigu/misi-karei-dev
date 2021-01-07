@@ -4,7 +4,7 @@ import parseAccessToken from '../../utils/parseAccessToken';
 import getPermissionName from '../../utils/getPermissionName';
 
 import { ReactComponent as LoadingIcon } from '../../utils/loading2.svg';
-import { ArrowUpward, Security, ChildCare, Group } from '@material-ui/icons'
+import { ArrowUpward, Security, ChildCare, Group, Lens } from '@material-ui/icons'
 
 import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -76,7 +76,7 @@ const getPermColour = (n: number) => {
 
 const getPermIcon = (n: number) => {
   if(n < 3)
-    return null
+    return <Lens />
   if(n < 4)
     return <Group />
   if(n < 5)
@@ -90,7 +90,7 @@ function UserList(props: Props) {
 
   const [userList, setUserlist] = useState<TUserList>()
   const [loading, setLoading] = useState(true);
-  const [status, setStatus] = useState('loading');
+  const [status, setStatus] = useState('Loaded user list');
   const [updateList, setUpdateList] = useState(true);
 
   const renderUserList = () => {
@@ -124,7 +124,6 @@ function UserList(props: Props) {
         setUpdateList(!updateList);
       });
     }
-
 
     if(userList !== undefined) {
       return(
@@ -176,11 +175,7 @@ function UserList(props: Props) {
         console.log(json);
         setUserlist(json);
 
-        if(loading) {
-          setLoading(false);
-          setStatus('Loaded user list');
-        }
-          
+        setLoading(false); 
       });
   }, [updateList]);
 
