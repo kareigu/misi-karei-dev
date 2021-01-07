@@ -8,7 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { Container } from '@material-ui/core';
+import { Container, Tooltip } from '@material-ui/core';
 
 interface EmoteList {
   [key: string]: string
@@ -39,6 +39,16 @@ function Emotes() {
   const [contents, setContents] = useState<EmoteList>();
   const [loading, setLoading] = useState(true);
 
+  const copyText = (code: string) => {
+    const temp = document.createElement('textarea');
+    document.body.appendChild(temp);
+    temp.value = code;
+    temp.select();
+    temp.setSelectionRange(0, 9999999);
+    document.execCommand('copy');
+    document.body.removeChild(temp);
+  }
+
   function renderTable() {
 
     if(contents !== undefined) {
@@ -47,7 +57,12 @@ function Emotes() {
       return(
         keys.map(key => (
           <TableRow  key={key} >
-            <TableCell className={classes.emoteCells}>{key}</TableCell >
+            <TableCell 
+              className={classes.emoteCells}
+              onClick={(e) => copyText(e.currentTarget.innerText)}
+            >
+              {key}
+            </TableCell >
             <TableCell className={classes.imgCells}><img src={`${baseUrl}${contents[key]}`} alt={key}/></TableCell >
           </TableRow >
         ))
@@ -82,7 +97,7 @@ function Emotes() {
             <Table className={classes.table} aria-label="simple table">
               <TableHead className={classes.header}>
                 <TableRow>
-                  <TableCell className={classes.header}>Emote</TableCell>
+                  <TableCell className={classes.header}>Emote (click to copy) </TableCell>
                   <TableCell className={classes.header}>Image</TableCell>
                 </TableRow>
               </TableHead>
