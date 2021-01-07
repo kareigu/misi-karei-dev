@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import parseAccessToken from '../../utils/parseAccessToken';
+import getPermissionName from '../../utils/getPermissionName';
 
 import paths from '../../utils/paths.json';
 const reqPath = process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath;
@@ -57,27 +58,6 @@ function UserList(props: Props) {
       });
     }
 
-    const getPermissionName = (n: number) => {
-      switch (n) {
-        case 5:
-          return 'Admin'
-
-        case 4:
-          return 'Moderator'
-
-        case 3:
-          return 'VIP'
-
-        case 2:
-          return 'Even better user'
-
-        case 1:
-          return 'Slightly better user'
-      
-        default:
-          return 'Normal user'
-      }
-    }
 
     if(userList !== undefined) {
       return(
