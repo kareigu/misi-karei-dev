@@ -62,9 +62,10 @@ function App() {
             }
 
             { !loggedIn &&
-              <a href={LoginURL}>
-                <NavButton text="login" />
-              </a>
+              <NavButton 
+                text="login" 
+                onClick={() => window.location.href = LoginURL}
+              />
             }
 
             { loggedIn &&
