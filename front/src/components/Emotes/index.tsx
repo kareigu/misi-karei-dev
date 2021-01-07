@@ -1,10 +1,40 @@
 import React, { useEffect, useState } from 'react';
 
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import { Container } from '@material-ui/core';
+
 interface EmoteList {
   [key: string]: string
 }
 
+const useStyles = makeStyles({
+  table: {
+    minWidth: 390,
+    maxWidth: 390,
+  },
+  header: {
+    backgroundColor: '#14211d',
+    color: 'white'
+  },
+  emoteCells: {
+    backgroundColor: '#13241f',
+    color: 'white'
+  },
+  imgCells: {
+    backgroundColor: '#1e3d34'
+  }
+});
+
 function Emotes() {
+
+  const classes = useStyles();
 
   const [contents, setContents] = useState<EmoteList>();
   const [loading, setLoading] = useState(true);
@@ -16,10 +46,10 @@ function Emotes() {
       const keys = Object.keys(contents).sort();
       return(
         keys.map(key => (
-          <tr key={key}>
-            <td>{key}</td>
-            <td><img src={`${baseUrl}${contents[key]}`} alt={key}/></td>
-          </tr>
+          <TableRow  key={key} >
+            <TableCell className={classes.emoteCells}>{key}</TableCell >
+            <TableCell className={classes.imgCells}><img src={`${baseUrl}${contents[key]}`} alt={key}/></TableCell >
+          </TableRow >
         ))
       )
     } else {
@@ -47,19 +77,21 @@ function Emotes() {
       }
 
       { !loading &&
-        <table style={{
-          margin: 'auto'
-        }}>
-          <thead>
-            <tr>
-              <th>Emote</th>
-              <th>Image</th>
-            </tr>
-          </thead>
-          <tbody>
-            { renderTable() }
-          </tbody>
-        </table>
+        <Container maxWidth="xs">
+          <TableContainer component={Paper} className={classes.header}>
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead className={classes.header}>
+                <TableRow>
+                  <TableCell className={classes.header}>Emote</TableCell>
+                  <TableCell className={classes.header}>Image</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody className={classes.imgCells}>
+                { renderTable() }
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Container>
       }
     </div>
   )
