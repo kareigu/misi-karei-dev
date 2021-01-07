@@ -13,6 +13,9 @@ import paths from './utils/paths.json';
 import NavButton from './components/NavButtons';
 import checkLogin from './utils/Login';
 
+import { ReactComponent as LoadingIcon } from './utils/loading2.svg'
+
+
 const Quotes = React.lazy(() => import('./components/quotes'));
 const Niilo = React.lazy(() => import('./components/niilo'));
 const Home = React.lazy(() => import('./components/home'));
@@ -24,7 +27,7 @@ const Misc = React.lazy(() => import('./components/misc'));
 const LoginURL = process.env.NODE_ENV === 'development' ? paths.devOAuth : paths.productionOAuth;
 
 function App() {
-  const renderLoad = (<h2 style={{color: 'white'}}>Loading...</h2>);
+  const renderLoad = (<LoadingIcon style={{marginTop: '150px'}} />);
 
   useEffect(() => {
     checkLogin()
