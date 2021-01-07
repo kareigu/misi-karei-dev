@@ -4,6 +4,8 @@ import GetFullQuoteList from '../../utils/getData';
 import QuoteBlock from '../QuoteBlock';
 import PageSwitcher from '../PageSwitcher';
 
+import { ReactComponent as LoadingIcon } from '../../utils/loading2.svg';
+
 interface props {
   source: 'quotes' | 'niilo',
   permLevel: number
@@ -49,7 +51,7 @@ function QuoteList(props: props) {
       }
       
       <div className="quotelist-container">
-        {service.status === 'loading' && <div>Loading...</div>}
+        {service.status === 'loading' && <LoadingIcon style={{marginTop: '150px'}} />}
         {service.status === 'loaded' &&
           list ? 
             list.map(quoteblock => (
