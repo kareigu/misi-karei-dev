@@ -3,6 +3,8 @@ import paths from '../../utils/paths.json';
 
 import NavButton from '../NavButtons';
 
+import { Button, Chip } from '@material-ui/core';
+
 const reqPath = process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath;
 
 type channel = 'ahha' | 'botspam';
@@ -47,20 +49,33 @@ function StreamNotify() {
 
   return (
     <div>
-      <label>Select channel: </label>
-      <NavButton 
-        text={channel.toUpperCase()}
+      <br/>
+      <Button 
+        variant="contained"
+        color={ channel === 'ahha' ? 'secondary' : 'primary'}
         onClick={() => setChannel(channel === 'ahha' ? 'botspam' : 'ahha')}
-      />
+      >
+        { channel === 'ahha' ? '😂 AHHA ' : '🤖 BOTSPAM ' }
+      </Button>
       <h1>Send stream notification</h1>
 
-      <NavButton 
-        text="Striimi live!"
+      <Button 
+        variant={ fetching ? 'outlined' : 'contained' }
+        color="primary"
         onClick={handleSubmit}
-        active={fetching}
-      />
+      >
+        Striimi live!
+      </Button>
 
-      <h2>{ status }</h2>
+      <br/>
+      
+      <p>
+        <Chip
+          color="primary"
+          label={status}
+        />
+      </p>
+      
     </div>
   )
 }
