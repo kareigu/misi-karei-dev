@@ -69,12 +69,12 @@ function StreamNotify() {
 
       <br/>
       
-      <p>
+      <div style={{marginTop: '20px', marginBottom: '10px'}}>
         <Chip
           color="primary"
           label={status}
         />
-      </p>
+      </div>
       
     </div>
   )
