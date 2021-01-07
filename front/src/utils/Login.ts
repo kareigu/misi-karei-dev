@@ -1,6 +1,11 @@
 import paths from './paths.json';
 
 
+type TLogResp = {
+  logged: boolean,
+  permission: number
+}
+
 const useCheckLogin = () => {
 
   const reqPath = process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath;
@@ -19,38 +24,57 @@ const useCheckLogin = () => {
       return JSON.stringify({token_type: 'no-token'});
   }
 
-  return fetch(`${reqPath}OAuth`,
-  {
-    method: 'POST',
-    mode: 'cors',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: access_token()
-  })
-  .then(res => res.json())
-  .then(json => {
-    if(json.code) {
-      console.warn(json);
-      return {
-        logged: false,
-        permission: 0
-      }
-    } else {
-      localStorage.setItem('userData', JSON.stringify(json));
-      if(typeof json.permissionLevel === 'number')
-        return {
-          logged: true,
-          permission: json.permissionLevel
-        }
-      else
-        return {
-          logged: true,
+  const checkAuth = () => {
+    const userData = access_token();
+
+    if (userData.includes('no-token')) {
+      const promise: Promise<TLogResp> = new Promise(res => {
+        res({
+          logged: false,
           permission: 0
-        }
+        });
+      })
+
+      return promise;
+    } else {
+      return fetch(`${reqPath}OAuth`,
+        {
+          method: 'POST',
+          mode: 'cors',
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: access_token()
+        })
+        .then(res => res.json())
+        .then(json => {
+          if(json.code) {
+            console.warn(json);
+            const rtrn: TLogResp = {
+              logged: false,
+              permission: 0
+            }
+            return rtrn;
+          } else {
+            localStorage.setItem('userData', JSON.stringify(json));
+            if(typeof json.permissionLevel === 'number') {
+              const rtrn: TLogResp = {
+                logged: true,
+                permission: json.permissionLevel
+              }
+              return rtrn;
+            } else 
+              return {
+                logged: true,
+                permission: 0
+              }
+          }
+        });
     }
-  });
+  }
+
+  return checkAuth();
 }
 
 export default useCheckLogin;
