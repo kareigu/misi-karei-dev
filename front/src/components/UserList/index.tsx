@@ -3,10 +3,24 @@ import React, { useEffect, useState } from 'react';
 import parseAccessToken from '../../utils/parseAccessToken';
 import getPermissionName from '../../utils/getPermissionName';
 
+import { ReactComponent as LoadingIcon } from '../../utils/loading2.svg';
+import { ArrowUpward, Security, ChildCare, Group } from '@material-ui/icons'
+
+import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
+import { Avatar, Chip } from '@material-ui/core';
+
 import paths from '../../utils/paths.json';
 const reqPath = process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath;
 
-type UserList = [
+type TUserList = [
   {
     id: string,
     username: string,
@@ -19,9 +33,62 @@ interface Props {
   permLevel: number
 }
 
+const StyledTableCell = withStyles((theme: Theme) =>
+  createStyles({
+    head: {
+      backgroundColor: '#09131c',
+      color: 'white',
+    },
+    body: {
+      fontSize: 14,
+      color: 'white',
+    },
+  }),
+)(TableCell);
+
+const StyledTableRow = withStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      '&:nth-of-type(odd)': {
+        backgroundColor: '#060d14',
+      },
+      '&:nth-of-type(even)': {
+        backgroundColor: '#14212e',
+      },
+    },
+  }),
+)(TableRow);
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650
+  }
+});
+
+const getPermColour = (n: number) => {
+  if(n < 3)
+    return 'default'
+  if(n < 4)
+    return 'primary'
+  if(n >= 4)
+    return 'secondary'
+}
+
+const getPermIcon = (n: number) => {
+  if(n < 3)
+    return null
+  if(n < 4)
+    return <Group />
+  if(n < 5)
+    return <Security />
+  if(n >= 5)
+    return <ChildCare />
+}
+
+
 function UserList(props: Props) {
 
-  const [userList, setUserlist] = useState<UserList>()
+  const [userList, setUserlist] = useState<TUserList>()
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState('loading');
   const [updateList, setUpdateList] = useState(true);
@@ -62,20 +129,35 @@ function UserList(props: Props) {
     if(userList !== undefined) {
       return(
         userList.map(el => (
-          <tr key={el.id}>
-            <td><img src={el.avatar} alt={el.id} width="50%" height="50%" /></td>
-            <td>{el.username}</td>
-            <td>{getPermissionName(el.permissionLevel)}</td>
+          <StyledTableRow key={el.id}>
+            <StyledTableCell><Avatar src={el.avatar} alt={el.username} /></StyledTableCell>
+            <StyledTableCell>{el.username}</StyledTableCell>
+            <StyledTableCell>
+              <Chip 
+                icon={ getPermIcon(el.permissionLevel) }
+                color={ getPermColour(el.permissionLevel) }
+                label={ getPermissionName(el.permissionLevel) }
+              />
+            </StyledTableCell>
+
             { props.permLevel >= 5 &&
-              el.permissionLevel < 5 &&
-                <td
-                  onClick={() => upgradePermissions(el.permissionLevel + 1, el.id)}
-                >
-                  To {getPermissionName(el.permissionLevel + 1)}
-                </td>
+              <StyledTableCell>
+                { el.permissionLevel >= 5 &&
+                  <p>Already at max</p>
+                }
+                { el.permissionLevel < 5 &&
+                  <Chip 
+                    icon={ <ArrowUpward /> }
+                    clickable
+                    color={ getPermColour(el.permissionLevel + 1) }
+                    label={`To ${getPermissionName(el.permissionLevel + 1)}`}
+                    onClick={() => upgradePermissions(el.permissionLevel + 1, el.id)}
+                  />
+                }  
+              </StyledTableCell>
             }
             
-          </tr>
+          </StyledTableRow>
         ))
       )
     } else {
@@ -102,37 +184,54 @@ function UserList(props: Props) {
       });
   }, [updateList]);
 
+  const classes = useStyles();
+
   return(
     <div>
       <h1>User List</h1>
 
-      <h4>{status}</h4>
+      { loading &&
+        <LoadingIcon 
+          style={{
+            marginBottom: '100px',
+            marginTop: '100px'
+          }}
+        />
+      }
 
       { !loading &&
-        <div>
-          <table style={{
-          margin: 'auto'
-          }}>
-            <thead>
-              <tr>
-                <th>Avatar</th>
-                <th>Name</th>
-                <th>Permission Level</th>
+      <>
+        <Chip 
+          label={status}
+          color="secondary"
+        />
+
+        <TableContainer 
+          component={Paper}
+          style={{marginTop: '20px'}}
+        >
+          <Table className={classes.table} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Avatar</StyledTableCell>
+                <StyledTableCell>Name</StyledTableCell>
+                <StyledTableCell>Permission Level</StyledTableCell>
                 { props.permLevel >= 5 &&
-                  <th>Promote</th>
+                  <StyledTableCell>Promote</StyledTableCell>
                 }
-              </tr>
-            </thead>
-            <tbody>
+              </TableRow>
+            </TableHead>
+            <TableBody>
               { userList &&
                 renderUserList()
               }
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
           <p>
             
           </p>
-        </div>
+        </TableContainer>
+      </>
       }
     </div>
   )
