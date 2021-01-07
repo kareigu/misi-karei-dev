@@ -36,8 +36,7 @@ module.exports = function(db, router) {
   });
 
   router.get('/login/users', async (req, res) => {
-    res.send(await db.find({}));
-    //res.send(await getUserList(db));
+    res.send(await getUserList(db));
   });
 
   router.post('/login/users', async (req, res) => {
