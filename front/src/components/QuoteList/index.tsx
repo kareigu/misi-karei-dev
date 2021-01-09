@@ -10,6 +10,7 @@ import { ReactComponent as LoadingIcon } from '../../utils/loading2.svg';
 import { Button, TextField } from '@material-ui/core';
 import { CloudDownload, Add, Close } from '@material-ui/icons';
 import UserContext from '../../utils/UserContext';
+import parseAccessToken from '../../utils/parseAccessToken';
 
 interface props {
   source: 'quotes' | 'niilo'
@@ -28,6 +29,30 @@ function QuoteList(props: props) {
   const [addingContent, setAddingContent] = useState(false);
   const [contentToAdd, setContentToAdd] = useState('');
   const {user} = useContext(UserContext);
+
+  const addQuote = () => {
+
+    if(contentToAdd.length > 1) {
+      fetch(`${reqPath}${props.source}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': parseAccessToken()
+        },
+        body: JSON.stringify({text: contentToAdd})
+      })
+        .then(res => res.json())
+        .then(json => {
+          setContentToAdd(json.message);
+          setTimeout(() => {
+            setAddingContent(false);
+            setContentToAdd('');
+          }, 1500);
+        });
+    } else {
+      setContentToAdd("Can't add empty quote")
+    }
+  }
 
   useEffect(() => {
     let tempArr: Array<JSX.Element> = [];
@@ -95,7 +120,7 @@ function QuoteList(props: props) {
             size="small"
             variant="contained"
             color="primary"
-            onClick={() => setAddingContent(false)}
+            onClick={() => addQuote()}
           >
             <Add /> Add
           </Button>
