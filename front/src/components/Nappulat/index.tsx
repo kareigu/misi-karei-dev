@@ -89,7 +89,7 @@ function Nappulat() {
 
   const [loading, setLoading] = React.useState(true);
   const [words, setWords] = React.useState<Array<string>>();
-  const [buttons, setButtons] = React.useState(12);
+  const [buttons, setButtons] = React.useState(Math.floor(Math.random() * 20)  + 12);
 
   React.useEffect(() => {
     setTimeout(() => {
@@ -156,7 +156,7 @@ function Nappulat() {
         <div style={{marginTop: '50px'}}>
           { buttons <= 0 &&
             <div>
-              <img src={ReactComponent} />
+              <img src={ReactComponent} alt="misikamodo" />
             </div>
           }
 
