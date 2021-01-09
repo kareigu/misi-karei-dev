@@ -21,10 +21,10 @@ Modal.setAppElement('body');
 
 function QuoteBlock(props: values) {
 
-  const [modalOpen, setOpen] = React.useState(false);
-  const [isEditing, setEditing] = React.useState(false);
-  const [adminMsg, setAdminMsg] = React.useState('');
-  const [editorText, setEditorText] = React.useState(props.text);
+  const [modalOpen, setOpen] = useState(false);
+  const [isEditing, setEditing] = useState(false);
+  const [adminMsg, setAdminMsg] = useState('');
+  const [editorText, setEditorText] = useState(props.text);
   const {fontSize, ref} = useFitText();
   const {user} = useContext(UserContext)
 
