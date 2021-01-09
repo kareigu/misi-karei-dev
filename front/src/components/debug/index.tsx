@@ -2,14 +2,13 @@ import React, { ChangeEvent, FormEvent } from 'react';
 import { useState } from 'react';
 import paths from '../../utils/paths.json'
 import parseAccessToken from '../../utils/parseAccessToken';
+import { useContext } from 'react';
+import UserContext from '../../utils/UserContext';
 
-interface Props {
-  permLevel: number
-}
-
-function Debug(props: Props) {
+function Debug() {
   const [backup, setBackup] = useState('');
   const [selectedDB, setSelectedDB] = useState('quotes');
+  const {user} = useContext(UserContext);
 
   function switchDB() {
     if(selectedDB === 'quotes')
@@ -48,11 +47,11 @@ function Debug(props: Props) {
 
   return (
     <div style={{color: 'white'}}>
-      { props.permLevel < 5 &&
+      { user.permLevel < 5 &&
         <h1>Painutkos vittuun täältä</h1>
       }
 
-      { props.permLevel >= 5 &&
+      { user.permLevel >= 5 &&
       <>
         <h1>Debug</h1>
         <button onClick={switchDB}>

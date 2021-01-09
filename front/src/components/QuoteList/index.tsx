@@ -7,8 +7,7 @@ import PageSwitcher from '../PageSwitcher';
 import { ReactComponent as LoadingIcon } from '../../utils/loading2.svg';
 
 interface props {
-  source: 'quotes' | 'niilo',
-  permLevel: number
+  source: 'quotes' | 'niilo'
 }
 
 function QuoteList(props: props) {
@@ -31,7 +30,6 @@ function QuoteList(props: props) {
               key={quote._id} 
               text={quote.text} 
               number={quote.number}
-              usertype={props.permLevel}
               origin={props.source}
             />
           )
@@ -42,7 +40,7 @@ function QuoteList(props: props) {
     }
     
     setList(tempArr);
-  }, [service, pageCount, props.source, props.permLevel]);
+  }, [service, pageCount, props.source]);
 
   return (
     <div>

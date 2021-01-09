@@ -12,8 +12,10 @@ import paths from './utils/paths.json';
 
 import NavButton from './components/NavButtons';
 import checkLogin from './utils/Login';
+import UserContext, { TUserContextFormat, DefaultUser } from './utils/UserContext';
 
 import { ReactComponent as LoadingIcon } from './utils/loading2.svg'
+import { useMemo } from 'react';
 
 
 const Quotes = React.lazy(() => import('./components/quotes'));
@@ -32,104 +34,111 @@ function App() {
   useEffect(() => {
     checkLogin()
       .then(res => {
-        setPermissionLevel(res.permission);
-        setLoggedIn(res.logged);
+        setUser({
+          permLevel: res.permLevel,
+          username: res.username,
+          avatar: res.avatar,
+          logged: res.logged
+        })
       })
   }, [])
 
 
-  const [permissionLevel, setPermissionLevel] = useState(0);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState<TUserContextFormat>(DefaultUser);
+
+  const value = useMemo(() => ({user, setUser}), [user, setUser]);
 
   return (
     <Router>
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+      <UserContext.Provider value={value}>
+        <div className="App">
+          <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
 
-          <nav>
-            <ul>
-              <NavButton to="/" text="Home" />
-              <NavButton to="quotes" text="Quotes" />
-              <NavButton to="niilo" text="Niilo" />
-              <NavButton to="misc" text="Misc" />
-            </ul>
-          </nav>
+            <nav>
+              <ul>
+                <NavButton to="/" text="Home" />
+                <NavButton to="quotes" text="Quotes" />
+                <NavButton to="niilo" text="Niilo" />
+                <NavButton to="misc" text="Misc" />
+              </ul>
+            </nav>
 
-          <nav className="adminPanels">
-            { permissionLevel >= 4 &&
-              <NavButton to="tools" text="tools" />
-            }
+            <nav className="adminPanels">
+              { user.permLevel >= 4 &&
+                <NavButton to="tools" text="tools" />
+              }
 
-            { !loggedIn &&
-              <NavButton 
-                text="login" 
-                onClick={() => window.location.href = LoginURL}
-              />
-            }
+              { !user.logged &&
+                <NavButton 
+                  text="login" 
+                  onClick={() => window.location.href = LoginURL}
+                />
+              }
 
-            { loggedIn &&
-              <NavButton to="signout" text="sign out" />
-            }
-          </nav>
-        </header>
+              { user.logged &&
+                <NavButton to="signout" text="sign out" />
+              }
+            </nav>
+          </header>
 
-        <Switch>
+          <Switch>
 
-          <Route path="/quotes">
-            <Suspense fallback={renderLoad}>
-              <Quotes permLevel={permissionLevel} />
-            </Suspense>
-          </Route>
+            <Route path="/quotes">
+              <Suspense fallback={renderLoad}>
+                <Quotes />
+              </Suspense>
+            </Route>
 
-          <Route path="/niilo">
-            <Suspense fallback={renderLoad}>
-              <Niilo permLevel={permissionLevel} />
-            </Suspense>
-          </Route>
+            <Route path="/niilo">
+              <Suspense fallback={renderLoad}>
+                <Niilo />
+              </Suspense>
+            </Route>
 
-          <Route path="/debug">
-            <Suspense fallback={renderLoad}>
-              <Debug permLevel={permissionLevel} />
-            </Suspense>
-          </Route>
+            <Route path="/debug">
+              <Suspense fallback={renderLoad}>
+                <Debug />
+              </Suspense>
+            </Route>
 
-          <Route path="/login">
-            <Suspense fallback={renderLoad}>
-              <Login 
-                path="login"
-              />
-            </Suspense>
-          </Route>
+            <Route path="/login">
+              <Suspense fallback={renderLoad}>
+                <Login 
+                  path="login"
+                />
+              </Suspense>
+            </Route>
 
-          <Route path="/signout">
-            <Suspense fallback={renderLoad}>
-              <Login 
-                path="signout"
-              />
-            </Suspense>
-          </Route>
+            <Route path="/signout">
+              <Suspense fallback={renderLoad}>
+                <Login 
+                  path="signout"
+                />
+              </Suspense>
+            </Route>
 
-          <Route path="/tools">
-            <Suspense fallback={renderLoad}>
-              <Tools permLevel={permissionLevel} />
-            </Suspense>
-          </Route>
+            <Route path="/tools">
+              <Suspense fallback={renderLoad}>
+                <Tools />
+              </Suspense>
+            </Route>
 
-          <Route path="/misc">
-            <Suspense fallback={renderLoad}>
-              <Misc />
-            </Suspense>
-          </Route>
+            <Route path="/misc">
+              <Suspense fallback={renderLoad}>
+                <Misc />
+              </Suspense>
+            </Route>
 
-          <Route path="/">
-            <Suspense fallback={renderLoad}>
-              <Home />
-            </Suspense>
-          </Route>
+            <Route path="/">
+              <Suspense fallback={renderLoad}>
+                <Home />
+              </Suspense>
+            </Route>
 
-        </Switch>
-      </div>
+          </Switch>
+        </div>
+      </UserContext.Provider>
     </Router>
   );
 }

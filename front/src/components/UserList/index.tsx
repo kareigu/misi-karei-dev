@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 
 import parseAccessToken from '../../utils/parseAccessToken';
 import getPermissionName from '../../utils/getPermissionName';
@@ -18,6 +18,7 @@ import Paper from '@material-ui/core/Paper';
 import { Avatar, Chip } from '@material-ui/core';
 
 import paths from '../../utils/paths.json';
+import UserContext from '../../utils/UserContext';
 const reqPath = process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath;
 
 type TUserList = [
@@ -28,10 +29,6 @@ type TUserList = [
     permissionLevel: number
   }
 ]
-
-interface Props {
-  permLevel: number
-}
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -86,12 +83,13 @@ const getPermIcon = (n: number) => {
 }
 
 
-function UserList(props: Props) {
+function UserList() {
 
   const [userList, setUserlist] = useState<TUserList>()
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState('Loaded user list');
   const [updateList, setUpdateList] = useState(true);
+  const {user} = useContext(UserContext);
 
   const renderUserList = () => {
 
@@ -139,7 +137,7 @@ function UserList(props: Props) {
               />
             </StyledTableCell>
 
-            { props.permLevel >= 5 &&
+            { user.permLevel >= 5 &&
               <StyledTableCell>
                 { el.permissionLevel >= 5 &&
                   <p>Already at max</p>
@@ -211,7 +209,7 @@ function UserList(props: Props) {
                 <StyledTableCell>Avatar</StyledTableCell>
                 <StyledTableCell>Name</StyledTableCell>
                 <StyledTableCell>Permission Level</StyledTableCell>
-                { props.permLevel >= 5 &&
+                { user.permLevel >= 5 &&
                   <StyledTableCell>Promote</StyledTableCell>
                 }
               </TableRow>

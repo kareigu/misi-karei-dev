@@ -4,20 +4,30 @@ import useFitText from 'use-fit-text'
 import './QuoteBlock.css';
 import paths from '../../utils/paths.json';
 import parseAccessToken from '../../utils/parseAccessToken';
+import UserContext from '../../utils/UserContext';
 
 import { IconButton, Tooltip} from '@material-ui/core'
 import { CreateOutlined, DeleteOutlined, SaveOutlined, ClearOutlined } from '@material-ui/icons'
+import { useState } from 'react';
+import { useContext } from 'react';
 
 type values = {
   text: string,
   number: number,
-  usertype: number,
   origin: 'quotes' | 'niilo'
 }
 
 Modal.setAppElement('body');
 
 function QuoteBlock(props: values) {
+
+  const [modalOpen, setOpen] = React.useState(false);
+  const [isEditing, setEditing] = React.useState(false);
+  const [adminMsg, setAdminMsg] = React.useState('');
+  const [editorText, setEditorText] = React.useState(props.text);
+  const {fontSize, ref} = useFitText();
+  const {user} = useContext(UserContext)
+
   const modalStyles = {
     content : {
       top          : '50%',
@@ -29,17 +39,12 @@ function QuoteBlock(props: values) {
       background   : '#1c1e24',
       borderRadius : '5px',
       width        : '300px',
-      height       : props.usertype >= 3 ? '150px' : '80px',
+      height       : user.permLevel >= 3 ? '150px' : '80px',
       maxWidth     : '300px',
       overflowx     : 'hidden'
     }
   };
 
-  const [modalOpen, setOpen] = React.useState(false);
-  const [isEditing, setEditing] = React.useState(false);
-  const [adminMsg, setAdminMsg] = React.useState('');
-  const [editorText, setEditorText] = React.useState(props.text);
-  const {fontSize, ref} = useFitText();
 
   function openModal() {
     setOpen(true);
@@ -159,7 +164,7 @@ function QuoteBlock(props: values) {
           </div>
         }
 
-        { props.usertype >= 3 &&
+        { user.permLevel >= 3 &&
           <div>
             {isEditing 
               ? (<div>
@@ -177,7 +182,7 @@ function QuoteBlock(props: values) {
                   <IconButton color="primary" onClick={() => setEditing(true)} id="editButton" className="adminButtons"><CreateOutlined /></IconButton>
                 </Tooltip>)}
             <h3 id="adminMsg" className="adminButtons">{adminMsg}</h3>
-            { props.usertype >= 4 &&
+            { user.permLevel >= 4 &&
               <Tooltip title="Delete">
                 <IconButton color="secondary" onClick={removeQuote} id="removeButton" className="adminButtons"><DeleteOutlined /></IconButton>
               </Tooltip>

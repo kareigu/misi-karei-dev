@@ -8,10 +8,9 @@ import './Tools.css';
 import { useLayoutEffect, useState } from 'react';
 
 import { ReactComponent as LoadingIcon } from '../../utils/loading2.svg'
+import { useContext } from 'react';
+import UserContext from '../../utils/UserContext';
 
-interface Props {
-  permLevel: number
-}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,10 +21,11 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-function Tools(props: Props) {
+function Tools() {
   const classes = useStyles();
 
   const [loading, setLoading] = useState(true);
+  const {user} = useContext(UserContext);
 
   useLayoutEffect(() => {
     setTimeout(() => setLoading(false), 1000);
@@ -39,13 +39,13 @@ function Tools(props: Props) {
       <header className="Misc-header">
         <h2>Tools</h2>
       </header>
-      { props.permLevel > 3 &&
+      { user.permLevel > 3 &&
         <Container className="streamNtf">
           <StreamNotify />
         </Container>
       }
       <Container className="userList">
-        <UserList permLevel={props.permLevel} />
+        <UserList />
       </Container>
     </div>
   )

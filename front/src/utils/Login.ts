@@ -1,4 +1,5 @@
 import paths from './paths.json';
+import { TUserContextFormat } from './UserContext';
 
 
 type TLogResp = {
@@ -28,10 +29,12 @@ const useCheckLogin = () => {
     const userData = access_token();
 
     if (userData.includes('no-token')) {
-      const promise: Promise<TLogResp> = new Promise(res => {
+      const promise: Promise<TUserContextFormat> = new Promise(res => {
         res({
-          logged: false,
-          permission: 0
+          permLevel: 0,
+          username: 'Guest',
+          avatar: '',
+          logged: false
         });
       })
 
@@ -51,24 +54,32 @@ const useCheckLogin = () => {
         .then(json => {
           if(json.code) {
             console.warn(json);
-            const rtrn: TLogResp = {
-              logged: false,
-              permission: 0
+            const rtrn: TUserContextFormat = {
+              permLevel: 0,
+              username: '',
+              avatar: '',
+              logged: false
             }
             return rtrn;
           } else {
             localStorage.setItem('userData', JSON.stringify(json));
             if(typeof json.permissionLevel === 'number') {
-              const rtrn: TLogResp = {
-                logged: true,
-                permission: json.permissionLevel
+              const rtrn: TUserContextFormat = {
+                permLevel: json.permissionLevel,
+                username: json.username,
+                avatar: json.avatar,
+                logged: true
               }
               return rtrn;
-            } else 
-              return {
-                logged: true,
-                permission: 0
+            } else {
+              const rtrn: TUserContextFormat = {
+                permLevel: 0,
+                username: '',
+                avatar: '',
+                logged: false
               }
+              return rtrn;
+            }
           }
         });
     }
