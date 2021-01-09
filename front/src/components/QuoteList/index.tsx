@@ -20,7 +20,7 @@ function QuoteList(props: props) {
   useEffect(() => {
     let tempArr: Array<JSX.Element> = [];
     if(service.status === 'loaded') {
-      setFinalPage(Math.round(service.payload.length / 51 + 1));
+      setFinalPage(Math.round(service.payload.length / 51) + 1);
 
       for (let i = (pageCount - 1) * 51; i < pageCount * 51; i++) {
         if(service.payload[i]){
