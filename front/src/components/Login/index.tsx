@@ -3,6 +3,7 @@ import { UserInfo } from '../../utils/types/UserInfo';
 
 import paths from '../../utils/paths.json';
 import { ReactComponent as LoadingIcon } from '../../utils/loading2.svg';
+import { Container, Avatar, Card, CardContent, makeStyles, Typography } from '@material-ui/core'
 
 type props = {
   path: 'login' | 'signout'
@@ -21,9 +22,25 @@ type loginResponse = {
   }
 }
 
+const useStyles = makeStyles({
+  root: {
+    minWidth: 275,
+    color: 'white',
+    backgroundColor: '#1e2229',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+});
+
 const reqPath = process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath;
 
 function Login(props: props) {
+
+  const classes = useStyles();
 
 
   useEffect(() => {
@@ -69,21 +86,30 @@ function Login(props: props) {
   const [loading, setLoading] = useState(true);
 
   return (
-    <div style={{color: 'white'}}>
+    <Container style={{color: 'white'}}>
       {
         props.path === 'login' &&
-        <div className="login">
+        <Container maxWidth="xs">
           <h1>Login</h1>
           { loading &&
             <LoadingIcon />
           }
           { userInfo &&
-            <div>
-              <p>Logged in as {userInfo.username}</p>
-              <img src={userInfo.avatar} alt={userInfo.username} />
-            </div>
+            <Card className={classes.root} variant="outlined">
+              <CardContent>
+                <Typography className={classes.title}>Logged in as</Typography>
+                <Typography className={classes.pos}>
+                  <Avatar
+                   src={userInfo.avatar}
+                   alt={userInfo.username} 
+                   style={{top: '30px', left: '50px'}}
+                  /> 
+                  {userInfo.username}
+                </Typography>
+              </CardContent>
+            </Card>
           }
-        </div>
+        </Container>
       }
 
       {
@@ -93,7 +119,7 @@ function Login(props: props) {
         </div>
       }
       
-    </div>
+    </Container>
   );
 }
 
