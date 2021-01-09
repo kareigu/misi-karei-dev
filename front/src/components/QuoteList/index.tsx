@@ -69,7 +69,7 @@ function QuoteList(props: props) {
         <>
         { !addingContent &&
           <Button
-            style={{left: '25px'}}
+            style={{left: '15px'}}
             variant="contained"
             color="secondary"
             onClick={() => setAddingContent(true)}
