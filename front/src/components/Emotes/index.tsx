@@ -9,6 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { Container } from '@material-ui/core';
+import { ReactComponent as LoadingIcon } from '../../utils/loading2.svg';
 
 interface EmoteList {
   [key: string]: string
@@ -88,7 +89,7 @@ function Emotes() {
     <div style={{color:'white'}}>
       <h1>Emotes</h1>
       { loading &&
-        <h2>Loading...</h2>
+        <LoadingIcon style={{marginTop: '150px'}} />
       }
 
       { !loading &&

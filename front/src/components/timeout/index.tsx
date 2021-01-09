@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Chart } from 'react-charts';
 
 import paths from '../../utils/paths.json';
+import { ReactComponent as LoadingIcon } from '../../utils/loading2.svg';
 
 const reqPath = process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath;
 
@@ -59,7 +60,7 @@ function Timeout() {
       }}
     >
       { !stats &&
-        <h1>Loading...</h1>
+        <h1><LoadingIcon style={{marginTop: '150px'}} /></h1>
       }
 
       { stats &&
