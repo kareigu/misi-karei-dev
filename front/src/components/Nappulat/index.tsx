@@ -105,7 +105,7 @@ function Nappulat() {
     }
     const temp: string[] = [random()];
 
-    for(let i = 0; i < 50; i++) {
+    for(let i = 0; i < 120; i++) {
       temp.push(random());
     }
 
