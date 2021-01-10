@@ -13,7 +13,7 @@
   height: 40px;
   pointer-events: none;
   box-shadow: 2px 2px 2px 1px var(--main-accent);
-  margin-left: 15px;
+  margin-left: 18px;
 }
 
 .App-header {
@@ -49,5 +49,5 @@
 .userPanel {
   position: relative;
   margin-left: auto;
-  margin-right: 15px;
+  margin-right: 18px;
 }

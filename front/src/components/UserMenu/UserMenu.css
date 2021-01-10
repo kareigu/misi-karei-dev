@@ -1,0 +1,18 @@
+
+.UserMenuContents {
+  background-color: #282c34;
+  color: white;
+}
+
+#menu-list-grow {
+  background-color: #282c34f5;
+}
+
+.MenuOption {
+  margin: auto;
+}
+
+.MenuOption a {
+  color: white;
+  border-bottom: 2px solid var(--main-accent);
+}

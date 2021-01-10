@@ -13,10 +13,10 @@ import paths from './utils/paths.json';
 import NavButton from './components/NavButtons';
 import checkLogin from './utils/Login';
 import UserContext, { TUserContextFormat, DefaultUser } from './utils/UserContext';
+import UserMenu from './components/UserMenu';
 
 import { ReactComponent as LoadingIcon } from './utils/loading2.svg'
 import { useMemo } from 'react';
-
 
 const Quotes = React.lazy(() => import('./components/quotes'));
 const Niilo = React.lazy(() => import('./components/niilo'));
@@ -48,6 +48,7 @@ function App() {
 
   const value = useMemo(() => ({user, setUser}), [user, setUser]);
 
+
   return (
     <Router>
       <UserContext.Provider value={value}>
@@ -65,9 +66,6 @@ function App() {
             </nav>
 
             <nav className="userPanel">
-              { user.permLevel >= 4 &&
-                <NavButton to="tools" text="tools" />
-              }
 
               { !user.logged &&
                 <NavButton 
@@ -77,7 +75,7 @@ function App() {
               }
 
               { user.logged &&
-                <NavButton to="signout" text="sign out" />
+                <UserMenu />
               }
             </nav>
           </header>
