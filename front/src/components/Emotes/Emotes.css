@@ -12,3 +12,9 @@
 .MuiContainer-root {
   animation: slide-up 0.5s ease;
 }
+
+@media only screen and (max-width: 424px) {
+  .MuiContainer-root {
+    max-width: 350px;
+  }
+}
