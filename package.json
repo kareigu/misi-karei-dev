@@ -4,7 +4,10 @@
   "description": "System for managing quotes",
   "main": "server.js",
   "scripts": {
-    "test": "nodemon --ignore './front/' server.js"
+    "test": "nodemon --ignore './front/' server.js",
+    "build": "cd ./front && yarn build --prod",
+    "deploy": "cd ./front && yarn deploy",
+    "build-deploy": "yarn build && yarn deploy"
   },
   "repository": {
     "type": "git",

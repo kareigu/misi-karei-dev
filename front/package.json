@@ -26,6 +26,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "deploy": "rm -r ../dist/* && cp -r ./build/* ../dist/",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
