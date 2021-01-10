@@ -17,6 +17,7 @@ import Paper from '@material-ui/core/Paper';
 
 import { Avatar, Chip } from '@material-ui/core';
 
+import './UserList.css'
 import paths from '../../utils/paths.json';
 import UserContext from '../../utils/UserContext';
 const reqPath = process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath;
@@ -126,7 +127,7 @@ function UserList() {
     if(userList !== undefined) {
       return(
         userList.map(el => (
-          <StyledTableRow key={el.id}>
+          <StyledTableRow key={el.id} className="animate">
             <StyledTableCell><Avatar src={el.avatar} alt={el.username} /></StyledTableCell>
             <StyledTableCell>{el.username}</StyledTableCell>
             <StyledTableCell>
@@ -202,6 +203,7 @@ function UserList() {
         <TableContainer 
           component={Paper}
           style={{marginTop: '20px'}}
+          className="animate"
         >
           <Table className={classes.table} aria-label="customized table">
             <TableHead>

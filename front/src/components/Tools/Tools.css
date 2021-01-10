@@ -24,6 +24,7 @@ body {
   border-radius: 10px;
   border: 2px solid rgba(0, 0, 0, 0.2);
   background-color: rgba(221, 211, 255, 0.2);
+  animation: slide-up 0.5s ease;
 }
 
 .userList {
@@ -35,4 +36,16 @@ body {
   border-radius: 10px;
   border: 2px solid rgba(0, 0, 0, 0.2);
   background-color:rgba(221, 211, 255, 0.2);
+  animation: slide-up 0.5s ease;
+}
+
+@keyframes slide-up {
+  0% {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
 }
