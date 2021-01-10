@@ -10,6 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { Container } from '@material-ui/core';
 import LoadingComponent from '../LoadingComponent';
+import './Emotes.css';
 
 interface EmoteList {
   [key: string]: string
