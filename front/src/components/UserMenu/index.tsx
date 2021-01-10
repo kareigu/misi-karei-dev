@@ -56,13 +56,13 @@ function UserMenu () {
         <Avatar src={user.avatar} alt={user.username} />
       </IconButton>
 
-      <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+      <Popper className="userMenuPopper" open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
         {({ TransitionProps, placement }) => (
           <Grow
             {...TransitionProps}
             style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
           >
-            <Paper>
+            <Paper elevation={5}>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList autoFocusItem={open} id="menu-list-grow">
                   <MenuItem onClick={handleClose}>

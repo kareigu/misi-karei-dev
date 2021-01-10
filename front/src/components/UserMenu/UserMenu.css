@@ -16,3 +16,7 @@
   color: white;
   border-bottom: 2px solid var(--main-accent);
 }
+
+.userMenuPopper {
+  z-index: 5;
+}
