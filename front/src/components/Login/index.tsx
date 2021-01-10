@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { UserInfo } from '../../utils/types/UserInfo';
 
 import paths from '../../utils/paths.json';
+import './Login.css'
 import LoadingComponent from '../LoadingComponent';
 import { Container, Avatar, Card, CardContent, makeStyles, Typography } from '@material-ui/core'
 
@@ -95,7 +96,7 @@ function Login(props: props) {
             <LoadingComponent margin="100px" />
           }
           { userInfo &&
-            <Card className={classes.root} variant="outlined">
+            <Card id="loginInfo" className={classes.root} variant="outlined">
               <CardContent>
                 <Typography className={classes.title}>Logged in as</Typography>
                 <Typography className={classes.pos}>
@@ -114,9 +115,13 @@ function Login(props: props) {
 
       {
         props.path === 'signout' &&
-        <div>
-          <h1>Signed out</h1>
-        </div>
+        <Container maxWidth="xs">
+          <Card id="loginInfo" className={classes.root} variant="outlined">
+              <CardContent>
+                <Typography className={classes.title}>Logging out</Typography>
+              </CardContent>
+            </Card>
+        </Container>
       }
       
     </Container>
