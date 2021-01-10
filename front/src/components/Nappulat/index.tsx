@@ -8,6 +8,8 @@ import {
   AddShoppingCart, Airplay, Album
   } from '@material-ui/icons';
 
+import './Nappulat.css';
+
 const nappulat = [
   'Nappi',
   'Nappula',
@@ -153,7 +155,7 @@ function Nappulat() {
       }
 
       { !loading &&
-        <div style={{marginTop: '50px'}}>
+        <div className="nappulat" style={{marginTop: '50px'}}>
           { buttons <= 0 &&
             <div>
               <img src={ReactComponent} alt="misikamodo" />
