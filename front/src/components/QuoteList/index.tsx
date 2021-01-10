@@ -7,11 +7,10 @@ import paths from '../../utils/paths.json';
 
 
 import LoadingComponent from '../LoadingComponent';
-import { Button, TextField, Container } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 import { CloudDownload, Add, Close } from '@material-ui/icons';
 import UserContext from '../../utils/UserContext';
 import parseAccessToken from '../../utils/parseAccessToken';
-import { DEFAULT_MIN_VERSION } from 'tls';
 
 interface props {
   source: 'quotes' | 'niilo'
