@@ -12,3 +12,34 @@
 .ReactChart {
   animation: slide-down 0.5s ease;
 }
+
+.timeoutChartContainer {
+  height: 600px;
+}
+
+.timeoutChart {
+  width: 600px;
+  height: 400px;
+}
+
+@media only screen and (max-width: 618px) {
+  .timeoutChartContainer {
+    height: 400px;
+  }
+  
+  .timeoutChart {
+    width: 400px;
+    height: 300px;
+  }
+}
+
+@media only screen and (max-width: 394px) {
+  .timeoutChartContainer {
+    height: 300px;
+  }
+  
+  .timeoutChart {
+    width: 350px;
+    height: 250px;
+  }
+}

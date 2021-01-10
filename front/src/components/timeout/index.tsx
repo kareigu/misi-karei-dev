@@ -50,33 +50,34 @@ function Timeout() {
   }, []);
   
   return (
-    <div
-      style={{
-        position: 'relative',
-        display: 'grid',
-        top: '50px',
-        margin: 'auto',
-        width: '800px',
-        height: '400px',
-      }}
-    >
-      { !stats &&
-        <h1><LoadingComponent margin="150px" /></h1>
-      }
+    <div className="timeoutChartContainer">
+      <div
+        className="timeoutChart"
+        style={{
+          position: 'relative',
+          display: 'grid',
+          top: '50px',
+          margin: 'auto'
+        }}
+      >
+        { !stats &&
+          <h1><LoadingComponent margin="150px" /></h1>
+        }
 
-      { stats &&
-        <Chart 
-          data={stats} 
-          series={{type: 'bar'}} 
-          axes={[
-            { primary: true, type: 'ordinal', position: 'bottom' },
-            { type: 'linear', position: 'left' }
-          ]} 
-          tooltip 
-          dark
-        />
-      }
-      
+        { stats &&
+          <Chart 
+            data={stats} 
+            series={{type: 'bar'}} 
+            axes={[
+              { primary: true, type: 'ordinal', position: 'bottom' },
+              { type: 'linear', position: 'left' }
+            ]} 
+            tooltip 
+            dark
+          />
+        }
+        
+      </div>
     </div>
   )
 }
