@@ -59,7 +59,7 @@ const StyledTableRow = withStyles((theme: Theme) =>
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 500
+    minWidth: 300
   }
 });
 
@@ -92,7 +92,7 @@ function UserList() {
   const [updateList, setUpdateList] = useState(true);
   const {user} = useContext(UserContext);
 
-  const renderUserList = () => {
+  const renderUserList = (desktop: boolean) => {
 
 
     const upgradePermissions = (n: number, id: string) => {
@@ -129,7 +129,19 @@ function UserList() {
         userList.map(el => (
           <StyledTableRow key={el.id} className="animate">
             <StyledTableCell><Avatar src={el.avatar} alt={el.username} /></StyledTableCell>
-            <StyledTableCell>{el.username}</StyledTableCell>
+            { !desktop &&
+              <StyledTableCell>
+                <Chip 
+                  icon={ getPermIcon(el.permissionLevel) }
+                  color={ getPermColour(el.permissionLevel) }
+                  label={ el.username }
+                />
+              </StyledTableCell>
+            }
+
+            { desktop &&
+            <>
+            <StyledTableCell>{ el.username }</StyledTableCell>
             <StyledTableCell>
               <Chip 
                 icon={ getPermIcon(el.permissionLevel) }
@@ -137,6 +149,8 @@ function UserList() {
                 label={ getPermissionName(el.permissionLevel) }
               />
             </StyledTableCell>
+            </>
+            }
 
             { user.permLevel >= 5 &&
               <StyledTableCell>
@@ -167,6 +181,39 @@ function UserList() {
     }
   }
 
+  const fullUserList = (desktop: boolean) => {
+    return (
+      <TableContainer 
+        component={Paper}
+        style={{marginTop: '20px'}}
+        className="animate"
+      >
+        <Table className={classes.table} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>Avatar</StyledTableCell>
+              <StyledTableCell>Name</StyledTableCell>
+              { desktop &&
+                <StyledTableCell>Permission Level</StyledTableCell>
+              }
+              { user.permLevel >= 5 &&
+                <StyledTableCell>Promote</StyledTableCell>
+              }
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            { userList &&
+              renderUserList(desktop)
+            }
+          </TableBody>
+        </Table>
+        <p>
+          
+        </p>
+      </TableContainer>
+    )
+  }
+
   useEffect(() => {
     fetch(`${reqPath}login/users`)
       .then(res => res.json())
@@ -194,33 +241,7 @@ function UserList() {
           label={status}
           color="secondary"
         />
-
-        <TableContainer 
-          component={Paper}
-          style={{marginTop: '20px'}}
-          className="animate"
-        >
-          <Table className={classes.table} aria-label="customized table">
-            <TableHead>
-              <TableRow>
-                <StyledTableCell>Avatar</StyledTableCell>
-                <StyledTableCell>Name</StyledTableCell>
-                <StyledTableCell>Permission Level</StyledTableCell>
-                { user.permLevel >= 5 &&
-                  <StyledTableCell>Promote</StyledTableCell>
-                }
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              { userList &&
-                renderUserList()
-              }
-            </TableBody>
-          </Table>
-          <p>
-            
-          </p>
-        </TableContainer>
+        {fullUserList(window.innerWidth > 420)}
       </>
       }
     </div>
