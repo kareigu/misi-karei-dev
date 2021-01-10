@@ -37,7 +37,7 @@ function Tools() {
         <LoadingComponent margin="120px" />
       </Backdrop>
       <header className="Misc-header">
-        <h2>Tools</h2>
+        <h2 id="toolsTitle">Tools</h2>
       </header>
       { user.permLevel > 3 &&
         <Container className="streamNtf">
