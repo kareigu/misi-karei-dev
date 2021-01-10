@@ -157,7 +157,7 @@ function QuoteList(props: props) {
       }
       
       <div className="quotelist-container">
-        {service.status === 'loading' && <LoadingComponent />}
+        {service.status === 'loading' && <LoadingComponent margin="150px"/>}
         {service.status === 'loaded' &&
           list ? 
             list.map(quoteblock => (
