@@ -1,8 +1,7 @@
 import React, { useState, Suspense, useEffect } from 'react';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
+  Switch, Route, NavLink
 } from 'react-router-dom';
 import logo from './temp.gif';
 import './App.css';
@@ -17,6 +16,8 @@ import UserMenu from './components/UserMenu';
 
 import { ReactComponent as LoadingIcon } from './utils/loading2.svg'
 import { useMemo } from 'react';
+import { IconButton, Tooltip } from '@material-ui/core';
+import { VpnKey } from '@material-ui/icons';
 
 const Quotes = React.lazy(() => import('./components/quotes'));
 const Niilo = React.lazy(() => import('./components/niilo'));
@@ -68,15 +69,24 @@ function App() {
             <nav className="userPanel">
 
               { !user.logged &&
-                <NavButton 
-                  text="login" 
-                  onClick={() => window.location.href = LoginURL}
-                />
+                <Tooltip title="Login">
+                  <IconButton
+                    style={{
+                      backgroundColor: 'rgba(0, 0, 0, 0.2)', 
+                      color: 'white',
+                      marginRight: '7px'
+                    }}
+                    onClick={() => window.location.href = LoginURL}
+                  >
+                    <VpnKey />
+                  </IconButton>
+                </Tooltip>
               }
 
               { user.logged &&
                 <UserMenu />
               }
+
             </nav>
           </header>
 
