@@ -10,8 +10,6 @@ module.exports = async function(db, data) {
       message: ''
     }
   }
-
-  console.log(data.access_token);
   
   if(!data.access_token) {
     const status = {

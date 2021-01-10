@@ -61,7 +61,6 @@ module.exports = function(db, router) {
   });
 
   router.get('/OAuth', async (req, res) => {
-    console.log(req.query);
     const { code } = req.query;
     const { OAUTH_ID, OAUTH_SECRET, REDIRECT_URL } = process.env;
 
