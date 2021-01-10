@@ -36,3 +36,24 @@
       transform: translateX(0);
   }
 }
+
+#mobileMiscNavigation {
+  display: none;
+}
+
+@media only screen and (max-width: 560px) {
+  #mobileMiscNavigation {
+    display: flex;
+    margin-right: auto;
+    margin-left: 1px;
+  }
+
+  .MuiSelect-root {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  #desktopMiscNavigation {
+    display: none;
+  }
+}

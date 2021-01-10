@@ -1,4 +1,5 @@
 import React, { useState, Suspense, useEffect } from 'react';
+import {FormControl, Select, MenuItem } from '@material-ui/core';
 
 import NavButton from '../NavButtons';
 import LoadingComponent from '../LoadingComponent';
@@ -35,6 +36,75 @@ function Misc() {
 
   const [active, setActive] = useState<LocHash>('timeout');
 
+  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    const value = event.target.value as LocHash;
+    console.log(value);
+    window.location.href = (`#${value}`)
+    setActive(value);
+  };
+
+  const desktopNavigation = () => {
+    return (
+      <nav id="desktopMiscNavigation">
+        <ul className="navButtons">
+          <NavButton 
+            text="Timeout/Ban" 
+            active={active === 'timeout' ? true : false}
+            onClick={() => {
+              setActive('timeout');
+              window.location.href = ('#timeout');
+            }}
+          />
+
+          <NavButton 
+            text="Saanan nickit" 
+            active={active === 'saana' ? true : false}
+            onClick={() => {
+              setActive('saana');
+              window.location.href = ('#saana');
+            }}
+          />
+
+          <NavButton 
+            text="Emotet" 
+            active={active === 'emotes' ? true : false}
+            onClick={() => {
+              setActive('emotes');
+              window.location.href = ('#emotes');
+            }}
+          />
+
+          <NavButton 
+            text="Mäkin nappulat" 
+            active={active === 'nappulat' ? true : false}
+            onClick={() => {
+              setActive('nappulat');
+              window.location.href = ('#nappulat');
+            }}
+          />
+        </ul>
+      </nav>
+    )
+  }
+
+  const mobileNavigation = () => {
+    return (
+      <FormControl id="mobileMiscNavigation" variant="filled">
+        <Select
+          variant="standard"
+          label="Page"
+          value={active}
+          onChange={handleChange}
+        >
+          <MenuItem value="timeout">Timeout/Ban</MenuItem>
+          <MenuItem value="saana">Saanan nickit</MenuItem>
+          <MenuItem value="emotes">Emotes</MenuItem>
+          <MenuItem value="nappulat">Mäkin nappulat</MenuItem>
+        </Select>
+      </FormControl>
+    )
+  }
+
 
   useEffect(() => {
     setActive(convertToValidHash());
@@ -43,45 +113,8 @@ function Misc() {
   return(
     <div style={{color: 'white'}}>
       <header className="Misc-header">
-        <nav>
-          <ul className="navButtons">
-            <NavButton 
-              text="Timeout/Ban" 
-              active={active === 'timeout' ? true : false}
-              onClick={() => {
-                setActive('timeout');
-                window.location.href = ('#timeout');
-              }}
-            />
-
-            <NavButton 
-              text="Saanan nickit" 
-              active={active === 'saana' ? true : false}
-              onClick={() => {
-                setActive('saana');
-                window.location.href = ('#saana');
-              }}
-            />
-
-            <NavButton 
-              text="Emotet" 
-              active={active === 'emotes' ? true : false}
-              onClick={() => {
-                setActive('emotes');
-                window.location.href = ('#emotes');
-              }}
-            />
-
-            <NavButton 
-              text="Mäkin nappulat" 
-              active={active === 'nappulat' ? true : false}
-              onClick={() => {
-                setActive('nappulat');
-                window.location.href = ('#nappulat');
-              }}
-            />
-          </ul>
-        </nav>
+        {desktopNavigation()}
+        {mobileNavigation()}
       </header>
 
       <div>
