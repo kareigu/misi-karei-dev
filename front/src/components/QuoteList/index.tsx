@@ -6,7 +6,7 @@ import PageSwitcher from '../PageSwitcher';
 import paths from '../../utils/paths.json';
 
 
-import { ReactComponent as LoadingIcon } from '../../utils/loading2.svg';
+import LoadingComponent from '../LoadingComponent';
 import { Button, TextField } from '@material-ui/core';
 import { CloudDownload, Add, Close } from '@material-ui/icons';
 import UserContext from '../../utils/UserContext';
@@ -157,7 +157,7 @@ function QuoteList(props: props) {
       }
       
       <div className="quotelist-container">
-        {service.status === 'loading' && <LoadingIcon className="loadingIcon" style={{marginTop: '150px'}} />}
+        {service.status === 'loading' && <LoadingComponent />}
         {service.status === 'loaded' &&
           list ? 
             list.map(quoteblock => (
