@@ -96,7 +96,7 @@ function QuoteList(props: props) {
         <>
         { !addingContent &&
           <Button
-            style={{left: '15px'}}
+            id="addButton"
             variant="contained"
             color="secondary"
             onClick={() => setAddingContent(true)}
@@ -110,7 +110,7 @@ function QuoteList(props: props) {
           <TextField
             id="custom-css-standard-input"
             label={props.source === 'quotes' ? 'quote' : props.source}
-            style={{left: '25px', width: '400px', height: '25px', bottom: '10px'}}
+            className="addQuoteField"
             inputProps={{ 'aria-label': 'naked' }}
             value={contentToAdd}
             onChange={e => setContentToAdd(e.currentTarget.value)}
@@ -119,6 +119,7 @@ function QuoteList(props: props) {
 
           <Button
             style={{marginLeft: '28px'}}
+            className="addQuoteButtons"
             size="small"
             variant="contained"
             color="primary"
@@ -129,6 +130,7 @@ function QuoteList(props: props) {
 
           <Button
             style={{marginLeft: '5px'}}
+            className="addQuoteButtons"
             size="small"
             variant="contained"
             color="default"
@@ -142,7 +144,7 @@ function QuoteList(props: props) {
         </>
         }
         <Button
-          style={{marginLeft: 'auto', marginRight: '15px'}}
+          id="downloadButton"
           variant="contained"
           color="primary"
           onClick={() => window.location.href = `${reqPath}${props.source}/backup`}
@@ -155,7 +157,7 @@ function QuoteList(props: props) {
       }
       
       <div className="quotelist-container">
-        {service.status === 'loading' && <LoadingIcon style={{marginTop: '150px'}} />}
+        {service.status === 'loading' && <LoadingIcon className="loadingIcon" style={{marginTop: '150px'}} />}
         {service.status === 'loaded' &&
           list ? 
             list.map(quoteblock => (

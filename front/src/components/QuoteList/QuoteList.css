@@ -15,3 +15,49 @@ body {
 .MuiFormLabel-root {
   color: white;
 }
+
+#downloadButton {
+  margin-left: auto;
+  margin-right: 15px;
+  animation: slide-left 0.25s ease;
+}
+
+#addButton {
+  margin-left: 15px;
+  animation: slide-right 0.25s ease;
+}
+
+.addQuoteField {
+  left: 25px;
+  width: 400px;
+  height: 25px;
+  bottom: 10px;
+  animation: slide-right 0.25s ease;
+}
+
+.addQuoteButtons {
+  animation: slide-right 0.1s ease backwards;
+}
+
+
+@keyframes slide-left {
+  0% {
+      opacity: 0;
+      transform: translateX(120px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
+
+@keyframes slide-right {
+  0% {
+      opacity: 0;
+      transform: translateX(-120px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
