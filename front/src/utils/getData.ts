@@ -3,7 +3,7 @@ import { Service } from './types/Service';
 import { Quote, Source } from './types/Quote';
 import paths from './paths.json';
 
-const GetFullQuoteList = (source: Source) => {
+const GetFullQuoteList = (source: Source, refresh: boolean) => {
   const [result, setResult] = useState<Service<Quote[]>>({
     status: 'loading'
   });
@@ -18,7 +18,7 @@ const GetFullQuoteList = (source: Source) => {
         setResult({ status: 'loaded', payload: res})
       })
       .catch(err => setResult({ status: 'error', error: err}));
-  }, [reqPath, source]);
+  }, [reqPath, source, refresh]);
   return result;
 }
 

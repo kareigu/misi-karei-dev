@@ -21,7 +21,8 @@ const reqPath = process.env.NODE_ENV === 'development' ? paths.devPath : paths.p
 
 function QuoteList(props: props) {
 
-  const service = GetFullQuoteList(props.source);
+  const [refreshContent, setRefreshContent] = useState(false);
+  const service = GetFullQuoteList(props.source, refreshContent);
   const [list, setList] = useState<Array<JSX.Element>>();
   //const [searchTerm, setSearchTerm] = useState('');
   const [pageCount, setPageCount] = useState(1);
@@ -47,6 +48,7 @@ function QuoteList(props: props) {
           setTimeout(() => {
             setAddingContent(false);
             setContentToAdd('');
+            setRefreshContent(!refreshContent);
           }, 1500);
         });
     } else {
