@@ -7,7 +7,7 @@ import UserList from '../UserList';
 import './Tools.css';
 import { useLayoutEffect, useState } from 'react';
 
-import { ReactComponent as LoadingIcon } from '../../utils/loading2.svg'
+import LoadingComponent from '../LoadingComponent';
 import { useContext } from 'react';
 import UserContext from '../../utils/UserContext';
 
@@ -34,7 +34,7 @@ function Tools() {
   return (
     <div>
       <Backdrop className={classes.backdrop} open={loading}>
-        <LoadingIcon />
+        <LoadingComponent margin="120px" />
       </Backdrop>
       <header className="Misc-header">
         <h2>Tools</h2>

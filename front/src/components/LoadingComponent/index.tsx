@@ -4,12 +4,13 @@ import './LoadingComponent.css';
 
 type TProps = {
   margin: string
+  bottom?: string
 }
 
 function LoadingComponent(props: TProps) {
 
   return (
-    <LoadingIcon className="loadingIcon" style={{marginTop: props.margin}} />
+    <LoadingIcon className="loadingIcon" style={{marginTop: props.margin, marginBottom: props.bottom}} />
   )
 }
 

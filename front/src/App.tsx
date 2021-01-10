@@ -6,13 +6,13 @@ import {
 import { IconButton, Tooltip } from '@material-ui/core';
 import { VpnKey } from '@material-ui/icons';
 import logo from './temp.gif';
-import { ReactComponent as LoadingIcon } from './utils/loading2.svg'
 import './App.css';
 
 import paths from './utils/paths.json';
 
 
 import NavButton from './components/NavButtons';
+import LoadingComponent from './components/LoadingComponent';
 import checkLogin from './utils/Login';
 import UserContext, { TUserContextFormat, DefaultUser } from './utils/UserContext';
 import UserMenu from './components/UserMenu';
@@ -28,7 +28,7 @@ const Misc = React.lazy(() => import('./components/misc'));
 const LoginURL = process.env.NODE_ENV === 'development' ? paths.devOAuth : paths.productionOAuth;
 
 function App() {
-  const renderLoad = (<LoadingIcon style={{marginTop: '150px'}} />);
+  const renderLoad = (<LoadingComponent margin="150px" />);
 
   useEffect(() => {
     checkLogin()

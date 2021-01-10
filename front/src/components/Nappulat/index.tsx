@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, IconButton } from '@material-ui/core';
-import { ReactComponent as LoadingIcon } from '../../utils/loading2.svg';
+import LoadingComponent from '../LoadingComponent';
 import ReactComponent from './796182251091394590.png'
 import { 
   AcUnit, AccessAlarm, Accessible, 
@@ -149,7 +149,7 @@ function Nappulat() {
   return(
     <div>
       { loading &&
-        <LoadingIcon style={{marginTop: '150px'}} />
+        <LoadingComponent margin="150px" />
       }
 
       { !loading &&

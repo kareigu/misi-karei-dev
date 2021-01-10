@@ -1,7 +1,7 @@
 import React, { useState, Suspense, useEffect } from 'react';
 
 import NavButton from '../NavButtons';
-import { ReactComponent as LoadingIcon } from '../../utils/loading2.svg'
+import LoadingComponent from '../LoadingComponent';
 
 import './misc.css'
 
@@ -85,7 +85,7 @@ function Misc() {
       </header>
 
       <div>
-        <Suspense fallback={<LoadingIcon style={{marginTop: '150px'}} />}>
+        <Suspense fallback={<LoadingComponent margin="150px" />}>
           {active === 'timeout' &&
             <Timeout />
           }

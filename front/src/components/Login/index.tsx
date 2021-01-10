@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { UserInfo } from '../../utils/types/UserInfo';
 
 import paths from '../../utils/paths.json';
-import { ReactComponent as LoadingIcon } from '../../utils/loading2.svg';
+import LoadingComponent from '../LoadingComponent';
 import { Container, Avatar, Card, CardContent, makeStyles, Typography } from '@material-ui/core'
 
 type props = {
@@ -24,6 +24,7 @@ type loginResponse = {
 
 const useStyles = makeStyles({
   root: {
+    marginTop: '50px',
     minWidth: 275,
     color: 'white',
     backgroundColor: '#1e2229',
@@ -90,9 +91,8 @@ function Login(props: props) {
       {
         props.path === 'login' &&
         <Container maxWidth="xs">
-          <h1>Login</h1>
           { loading &&
-            <LoadingIcon />
+            <LoadingComponent margin="100px" />
           }
           { userInfo &&
             <Card className={classes.root} variant="outlined">

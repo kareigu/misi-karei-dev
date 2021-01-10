@@ -3,7 +3,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import parseAccessToken from '../../utils/parseAccessToken';
 import getPermissionName from '../../utils/getPermissionName';
 
-import { ReactComponent as LoadingIcon } from '../../utils/loading2.svg';
+import LoadingComponent from '../LoadingComponent';
 import { ArrowUpward, Security, ChildCare, Group, Lens } from '@material-ui/icons'
 
 import { withStyles, Theme, createStyles, makeStyles } from '@material-ui/core/styles';
@@ -185,12 +185,7 @@ function UserList() {
       <h1>User List</h1>
 
       { loading &&
-        <LoadingIcon 
-          style={{
-            marginBottom: '100px',
-            marginTop: '100px'
-          }}
-        />
+        <LoadingComponent margin="50px" bottom="150px" />
       }
 
       { !loading &&
