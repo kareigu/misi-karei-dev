@@ -70,6 +70,7 @@ function QuoteList(props: props) {
               text={quote.text} 
               number={quote.number}
               origin={props.source}
+              refresh={setRefreshContent}
             />
           )
         } else {

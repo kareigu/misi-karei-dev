@@ -14,7 +14,8 @@ import { useContext } from 'react';
 type values = {
   text: string,
   number: number,
-  origin: 'quotes' | 'niilo'
+  origin: 'quotes' | 'niilo',
+  refresh: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 Modal.setAppElement('body');
@@ -81,7 +82,7 @@ function QuoteBlock(props: values) {
         setAdminMsg('Quote removed');
         setTimeout(() => {
           closeModal();
-          window.location.reload();
+          props.refresh(c => !c);
         }, 1000);
       } else {
         setAdminMsg(`${res.body}`);
@@ -110,7 +111,7 @@ function QuoteBlock(props: values) {
         setAdminMsg('Quote updated');
         setTimeout(() => {
           closeModal();
-          window.location.reload();
+          props.refresh(c => !c);
         }, 1000);
       } else {
         setAdminMsg(`${res.body}`);
