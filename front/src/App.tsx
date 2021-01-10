@@ -1,9 +1,12 @@
-import React, { useState, Suspense, useEffect } from 'react';
+import React, { useState, Suspense, useEffect, useMemo } from 'react';
 import {
   BrowserRouter as Router,
   Switch, Route, NavLink
 } from 'react-router-dom';
+import { IconButton, Tooltip } from '@material-ui/core';
+import { VpnKey } from '@material-ui/icons';
 import logo from './temp.gif';
+import { ReactComponent as LoadingIcon } from './utils/loading2.svg'
 import './App.css';
 
 import paths from './utils/paths.json';
@@ -13,11 +16,6 @@ import NavButton from './components/NavButtons';
 import checkLogin from './utils/Login';
 import UserContext, { TUserContextFormat, DefaultUser } from './utils/UserContext';
 import UserMenu from './components/UserMenu';
-
-import { ReactComponent as LoadingIcon } from './utils/loading2.svg'
-import { useMemo } from 'react';
-import { IconButton, Tooltip } from '@material-ui/core';
-import { VpnKey } from '@material-ui/icons';
 
 const Quotes = React.lazy(() => import('./components/quotes'));
 const Niilo = React.lazy(() => import('./components/niilo'));
