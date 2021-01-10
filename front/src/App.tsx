@@ -64,7 +64,7 @@ function App() {
               </ul>
             </nav>
 
-            <nav className="adminPanels">
+            <nav className="userPanel">
               { user.permLevel >= 4 &&
                 <NavButton to="tools" text="tools" />
               }

@@ -43,3 +43,9 @@
 .App-link {
   color: var(--link);
 }
+
+
+.userPanel {
+  position: relative;
+  padding-left: 500px;
+}
