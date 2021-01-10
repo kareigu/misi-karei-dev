@@ -1,7 +1,7 @@
 import React, { useState, Suspense, useEffect, useMemo } from 'react';
 import {
   BrowserRouter as Router,
-  Switch, Route, NavLink
+  Switch, Route
 } from 'react-router-dom';
 import { IconButton, Tooltip } from '@material-ui/core';
 import { VpnKey } from '@material-ui/icons';
