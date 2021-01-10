@@ -3,6 +3,7 @@ import { Chart } from 'react-charts';
 
 import paths from '../../utils/paths.json';
 import LoadingComponent from '../LoadingComponent';
+import './Timeout.css';
 
 const reqPath = process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath;
 
