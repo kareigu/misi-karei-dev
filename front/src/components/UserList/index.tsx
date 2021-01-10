@@ -59,7 +59,7 @@ const StyledTableRow = withStyles((theme: Theme) =>
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650
+    minWidth: 500
   }
 });
 
@@ -181,7 +181,7 @@ function UserList() {
   const classes = useStyles();
 
   return(
-    <div>
+    <div className="userListContainer">
       <h1>User List</h1>
 
       { loading &&
