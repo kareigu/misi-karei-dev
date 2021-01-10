@@ -44,7 +44,7 @@ function Misc() {
     <div style={{color: 'white'}}>
       <header className="Misc-header">
         <nav>
-          <ul>
+          <ul className="navButtons">
             <NavButton 
               text="Timeout/Ban" 
               active={active === 'timeout' ? true : false}
