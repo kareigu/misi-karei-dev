@@ -5,3 +5,5 @@ dist/
 backups/
 front/node_modules
 files/
+mongo_data/
+dump/
