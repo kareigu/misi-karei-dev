@@ -66,30 +66,36 @@ function UserMenu () {
             <Paper elevation={5}>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList autoFocusItem={open} id="menu-list-grow">
-                  <MenuItem onClick={handleClose}>
-                    <div className="MenuOption">
-                    <NavLink
-                      to="tools"
-                      activeStyle={{
-                        borderBottomColor: "var(--select-color)"
-                      }}
-                    >
-                      Tools
-                    </NavLink>
-                    </div>
-                  </MenuItem>
-                  <MenuItem onClick={handleClose}>
-                    <div className="MenuOption">
+
+                  <NavLink to="tools">
+                    <MenuItem onClick={handleClose}>
+                      <div className="MenuOption">
                       <NavLink
-                        to="signout"
+                        to="tools"
                         activeStyle={{
                           borderBottomColor: "var(--select-color)"
                         }}
                       >
-                        Sign out
+                        Tools
                       </NavLink>
-                    </div>
-                  </MenuItem>
+                      </div>
+                    </MenuItem>
+                  </NavLink>
+
+                  <NavLink to="signout">
+                    <MenuItem onClick={handleClose}>
+                      <div className="MenuOption">
+                        <NavLink
+                          to="signout"
+                          activeStyle={{
+                            borderBottomColor: "var(--select-color)"
+                          }}
+                        >
+                          Sign out
+                        </NavLink>
+                      </div>
+                    </MenuItem>
+                  </NavLink>
                 </MenuList>
               </ClickAwayListener>
             </Paper>
