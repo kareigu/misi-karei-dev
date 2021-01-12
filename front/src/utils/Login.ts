@@ -2,11 +2,6 @@ import paths from './paths.json';
 import { TUserContextFormat } from './UserContext';
 
 
-type TLogResp = {
-  logged: boolean,
-  permission: number
-}
-
 const useCheckLogin = () => {
 
   const reqPath = process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath;
