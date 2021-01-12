@@ -46,7 +46,7 @@ module.exports = function (db, router, usersDB) {
         const data = await addContent(db, {text: req.query.text});
         console.log(data);
         res.status(201);
-        res.send(`Added new quote #${data.number}`);
+        res.send(data.message);
       } else {
         res.send('Cannot add empty quote');
       }
