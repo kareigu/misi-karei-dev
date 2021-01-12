@@ -69,6 +69,7 @@ function App() {
               { !user.logged &&
                 <Tooltip title="Login">
                   <IconButton
+                    className="userButton"
                     style={{
                       backgroundColor: 'rgba(0, 0, 0, 0.2)', 
                       color: 'white',

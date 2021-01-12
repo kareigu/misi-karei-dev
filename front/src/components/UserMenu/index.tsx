@@ -50,6 +50,7 @@ function UserMenu () {
   return (
     <div className={classes.root}>
       <IconButton
+        className="userButton"
         ref={anchorRef}
         onClick={handleToggle}
       >
