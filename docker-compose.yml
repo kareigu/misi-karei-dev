@@ -1,0 +1,21 @@
+services:
+  mongo:
+    image: mongo
+    restart: always
+    volumes:
+      - ./mongo_data:/data/db
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+
+  web:
+    image: mxr/misi-site:latest
+    restart: always
+    ports:
+      - 7077:7077
+    volumes:
+      - ./backups:/usr/src/misi-site/backups
+      - ./files:/usr/src/misi-site/files
