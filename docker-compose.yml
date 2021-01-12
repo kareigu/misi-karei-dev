@@ -1,18 +1,21 @@
 services:
   mongo:
     image: mongo
+    container_name: misi_mongo
     restart: always
     volumes:
       - ./mongo_data:/data/db
 
   mongo-express:
     image: mongo-express
+    container_name: misi_mongo_express
     restart: always
     ports:
       - 8081:8081
 
   web:
     image: mxr/misi-site:latest
+    container_name: misi_webserver
     restart: always
     ports:
       - 7077:7077
