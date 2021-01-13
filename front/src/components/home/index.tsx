@@ -33,7 +33,7 @@ function Home() {
       
       { homeContent &&
         <Grid container spacing={2} className="homeContainer">
-          <Grid item xs={window.innerWidth < 640 ? 12 : 6}>
+          <Grid item xs={12} sm={6}>
               <Card className="contentCard">
                 <CardContent className="cardContent">
                   <Typography className="cardTitle">
@@ -48,7 +48,7 @@ function Home() {
             </Card>
           </Grid>
 
-          <Grid item xs={window.innerWidth < 640 ? 12 : 6}>
+          <Grid item xs={12} sm={6}>
             <Card className="contentCard">
               <CardContent className="cardContent">
                 <Typography className="cardTitle">
