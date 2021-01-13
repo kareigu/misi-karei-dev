@@ -3,7 +3,9 @@ import React from 'react';
 import { 
   Backdrop, Container, createStyles, 
   makeStyles, Theme, Drawer, IconButton
-} from '@material-ui/core'
+} from '@material-ui/core';
+
+import { Settings } from '@material-ui/icons';
 
 import StreamNotify from '../StreamNotify';
 import UserList from '../UserList';
@@ -67,8 +69,8 @@ function Tools() {
       <header className="Misc-header">
         <h2 id="toolsTitle">Tools</h2>
         { user.permLevel > 3 &&
-          <IconButton onClick={() => setSettingsOpen(!settingsOpen)} color="primary">
-            A
+          <IconButton className="settingsDrawerToggle" onClick={() => setSettingsOpen(!settingsOpen)} color="primary">
+            <Settings />
           </IconButton>
         }
       </header>
