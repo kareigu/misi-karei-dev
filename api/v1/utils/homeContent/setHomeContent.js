@@ -1,22 +1,15 @@
+const getHomeContent = require('./getHomeContent');
 
 module.exports = async function(db, newContent) {
-  const keys = Object.keys(newContent);
 
-  for(key of keys) {
-    if(key === 'latestStream') {
-      try {
-        await db.findOneAndUpdate({type: key}, {$set: {value: newContent[key]}});
-      } catch (err) {
-        console.error(err);
-      }
-    } else {
-      try {
-        await db.findOneAndUpdate({type: key}, {$set: {value: newContent[key]['number']}});
-      } catch (err) {
-        console.error(err);
-      }
+  for(el of newContent) {
+    try {
+      await db.findOneAndUpdate({type: el.type}, {$set: {value: el.value}});
+    } catch (err) {
+      console.error(err);
     }
   }
+  const newData = await getHomeContent(db);
 
-  return {message: 'Updated home content'};
+  return newData;
 }

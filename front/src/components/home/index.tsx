@@ -9,13 +9,13 @@ import { VoiceChat } from '@material-ui/icons';
 import paths from '../../utils/paths.json';
 const reqPath = process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath;
 
-interface IDailyContent {
+export interface IDailyContent {
   _id: string,
   text: string,
   number: number
 }
 
-interface IHomeContent {
+export interface IHomeContent {
   dailyQuotes: IDailyContent,
   dailyNiilo: IDailyContent,
   latestStream: string

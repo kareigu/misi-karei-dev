@@ -1,0 +1,22 @@
+.settingsDrawer {
+  color: white;
+  padding: 0px 35px;
+}
+
+.MuiInputBase-input {
+  color: white;
+}
+
+.MuiFormLabel-root {
+  color: white;
+}
+
+.settingsTextField {
+  margin: 12px 0px;
+}
+
+.homePageSettings {
+  background-color: rgba(255, 255, 255, 0.01);
+  border-radius: 5px;
+  padding: 10px;
+}

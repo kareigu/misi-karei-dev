@@ -17,13 +17,18 @@ module.exports = function(db, router) {
 
   router.get('/home/content', async (req, res) => {
     const rawContent = await getHomeContent(homeContent);
-    const content = await fetchHomeContent(db, rawContent);
 
-    res.send(content);
+    if(req.query.raw)
+      res.send(rawContent)
+    else {
+      const content = await fetchHomeContent(db, rawContent);
+
+      res.send(content);
+    }
   });
 
   router.post('/home/content', async (req, res) => {
-    if(!await checkPermissions(users, req.headers.authorization, 4)) {
+    if(await checkPermissions(users, req.headers.authorization, 4)) {
       const dbResponse = await setHomeContent(homeContent, req.body);
       res.send(dbResponse);
     } else {
