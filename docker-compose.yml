@@ -22,3 +22,4 @@ services:
     volumes:
       - ./backups:/usr/src/misi-site/backups
       - ./files:/usr/src/misi-site/files
+      - ./logs:/usr/src/misi-site/logs

@@ -2,6 +2,7 @@ const express = require('express');
 const compression = require('compression');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const rfs = require('rotating-file-stream');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const fs = require('fs');
@@ -22,7 +23,14 @@ app.use(compression());
 app.use(helmet({
   contentSecurityPolicy: false
 }));
+
+const logStream = rfs.createStream('access.log', {
+  interval: '1d',
+  path: path.join(__dirname, 'logs')
+});
+
 app.use(morgan('dev'));
+app.use(morgan('combined', { stream: logStream }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 

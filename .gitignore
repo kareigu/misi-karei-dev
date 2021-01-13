@@ -7,3 +7,5 @@ front/node_modules
 files/
 mongo_data/
 dump/
+logs/
+yarn-error.log
