@@ -9,12 +9,16 @@ import { VoiceChat } from '@material-ui/icons';
 import paths from '../../utils/paths.json';
 const reqPath = process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath;
 
+interface IDailyContent {
+  _id: string,
+  text: string,
+  number: number
+}
+
 interface IHomeContent {
-  [key: string]: {
-    _id: string,
-    text: string,
-    number: number
-  }
+  dailyQuotes: IDailyContent,
+  dailyNiilo: IDailyContent,
+  latestStream: string
 }
 
 
@@ -53,7 +57,7 @@ function Home() {
                     />
                   </Typography>
                   <YouTube 
-                    videoId="6hBLHkmBKDg" 
+                    videoId={homeContent.latestStream} 
                     className="latestStreamContainer" 
                     opts={YTOptions}
                   />
