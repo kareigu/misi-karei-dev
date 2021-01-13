@@ -10,6 +10,8 @@ module.exports = async function(db, rawContent) {
       content[el.type] = await quotes.findOne({number: el.value});
     else if(el.type === 'dailyNiilo')
       content[el.type] = await niilo.findOne({number: el.value});
+    else if(el.type === 'latestStream')
+      content[el.type] = el.value;
   }
 
   return content;
