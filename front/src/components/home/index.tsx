@@ -1,8 +1,10 @@
 import React from 'react';
 import './Home.css';
-import { Badge, Grid, Card, CardContent, Typography } from '@material-ui/core';
+import { Badge, Grid, Card, CardContent, Typography, Container, Chip } from '@material-ui/core';
 import { useState, useEffect } from 'react';
 import LoadingComponent from '../LoadingComponent';
+import YouTube from 'react-youtube';
+import { VoiceChat } from '@material-ui/icons';
 
 import paths from '../../utils/paths.json';
 const reqPath = process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath;
@@ -25,6 +27,11 @@ function Home() {
       .then(json => setHomeContent(json));
   }, []);
 
+  const YTOptions = {
+    width: window.innerWidth < 768 ? (window.innerWidth - 120).toString() : '768',
+    height: window.innerWidth < 768 ? (window.innerWidth / 2.5).toString() : '380'
+  }
+
   return (
     <div id="homeComponent">
       { !homeContent &&
@@ -33,6 +40,28 @@ function Home() {
       
       { homeContent &&
         <Grid container spacing={2} className="homeContainer">
+
+          <Grid item xs={12}>
+            <Container maxWidth="md">
+              <Card id="latestStreamCard" className="contentCard">
+                <CardContent className="cardContent">
+                  <Typography style={{marginBottom: '10px'}} className="cardTitle">
+                    <Chip 
+                      label="Viimeisin striimi" 
+                      color="primary" 
+                      icon={<VoiceChat />}
+                    />
+                  </Typography>
+                  <YouTube 
+                    videoId="6hBLHkmBKDg" 
+                    className="latestStreamContainer" 
+                    opts={YTOptions}
+                  />
+                </CardContent>
+              </Card>
+            </Container>
+          </Grid>
+
           <Grid item xs={12} sm={6}>
               <Card className="contentCard">
                 <CardContent className="cardContent">

@@ -26,6 +26,10 @@ body {
   top: 10px;
 }
 
+.latestStreamContainer {
+
+}
+
 #logo {
   width: 500px;
   animation: blend-inn 1s ease;
