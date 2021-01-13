@@ -13,12 +13,14 @@ module.exports = function (db) {
   const niiloRoutes = require('./routes/niilo') (niilo, router, users);
   const loginRoutes = require('./routes/login') (users, router);
   const toolRoutes = require('./routes/tools') (users, router);
+  const homeRoutes = require('./routes/home') (db, router);
 
   router.use('/', [
                     quoteRoutes, 
                     niiloRoutes, 
                     loginRoutes,
-                    toolRoutes
+                    toolRoutes,
+                    homeRoutes
                   ]);
 
   return router;
