@@ -1,9 +1,11 @@
 import React from 'react';
 import './SettingsDrawer.css';
 
-import { TextField, Chip, IconButton } from '@material-ui/core';
+import { TextField, Chip, IconButton, Snackbar } from '@material-ui/core';
+import { History, Done } from '@material-ui/icons';
 import { IRawHomeContent } from '../Tools';
 import { useState } from 'react';
+import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 
 import paths from '../../utils/paths.json';
 import parseAccessToken from '../../utils/parseAccessToken';
@@ -14,12 +16,19 @@ interface IProps {
   updateFn: React.Dispatch<React.SetStateAction<IRawHomeContent[] | undefined>>
 }
 
+function Alert(props: AlertProps) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 
 function SettingsDrawer(props: IProps) {
 
   const [dailyQuotes, setDailyQuotes] = useState(props.content[0].value);
   const [dailyNiilo, setDailyNiilo] = useState(props.content[1].value);
   const [latestStream, setLatestStream] = useState(props.content[2].value);
+
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('Empty alert');
 
   const handleSubmit = () => {
     const fieldsToSend: Array<IRawHomeContent> = [];
@@ -51,11 +60,19 @@ function SettingsDrawer(props: IProps) {
       .then(res => res.json())
       .then(json => {
         console.log(json);
-        if(!json.message)
+        if(!json.message) {
           props.updateFn(json);
+          setAlertMessage('Updated home settings');
+          setAlertOpen(true);
+        } else {
+          setAlertMessage(json.message);
+          setAlertOpen(true);
+        }
       });
     } else {
       console.log('No changes made');
+      setAlertMessage('Make changes before submitting');
+      setAlertOpen(true);
     }
   }
 
@@ -78,16 +95,30 @@ function SettingsDrawer(props: IProps) {
         color="secondary"
         onClick={() => updateFn(props.content[index].value)}
       >
-        R
+        <History />
       </IconButton>
     </>
     )
   }
 
+  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setAlertOpen(false);
+  };
+
 
   return (
     <div className="settingsDrawer">
       <h2>Settings</h2>
+
+      <Snackbar open={alertOpen} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="info">
+          {alertMessage}
+        </Alert>
+      </Snackbar>
 
       <div className="homePageSettings">
         <Chip label="Home settings" color="primary" />
@@ -101,7 +132,7 @@ function SettingsDrawer(props: IProps) {
         <IconButton
           onClick={handleSubmit}
         >
-          S
+          <Done color="primary" />
         </IconButton>
 
       </div>
