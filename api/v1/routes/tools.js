@@ -1,13 +1,16 @@
-const streamNotification = require('../utils/streamNotification');
+const streamNotification = require('../utils/tools/streamNotification');
 const readTimeouts = require('../utils/readTimeouts');
 const checkPermissions = require('../utils/users/checkPermissions');
 
-module.exports = function (users, router) {
+module.exports = function (db, router) {
+  const users = db.get('users');
+  const homeContent = db.get('homeContent');
+
   router.post('/tools/notify', (req, res) => {
     checkPermissions(users, req.headers.authorization, 4)
       .then(hasPermission => {
         if(hasPermission) {
-          streamNotification(req.body)
+          streamNotification(req.body, homeContent)
             .then(json => res.send(json));
         } else {
           res.send({msg: "Invalid permissions"});

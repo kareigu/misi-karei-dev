@@ -1,7 +1,7 @@
 const discord = require('discord.js');
 const fetch = require('node-fetch');
 
-module.exports = function(body) {
+module.exports = function(body, homeContent) {
   if(body.hook) {
     const YOUTUBE_API = process.env.YOUTUBE_API;
     const ID = 'UCFpkeZklDZjWwmuatMTbjMw';
@@ -19,6 +19,7 @@ module.exports = function(body) {
           .then(json => {
             if(json.items[0]) {
               const info = json.items[0];
+              homeContent.findOneAndUpdate({type: 'latestStream'}, {$set: {value: info.id.videoId}});
               webhook.send(`Striimi live! \n https://youtube.com/watch?v=${info.id.videoId}`);
               return { msg: 'Sent notification' };
             } else {

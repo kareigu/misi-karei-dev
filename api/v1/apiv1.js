@@ -12,7 +12,7 @@ module.exports = function (db) {
   const quoteRoutes = require('./routes/quotes') (quotes, router, users);
   const niiloRoutes = require('./routes/niilo') (niilo, router, users);
   const loginRoutes = require('./routes/login') (users, router);
-  const toolRoutes = require('./routes/tools') (users, router);
+  const toolRoutes = require('./routes/tools') (db, router);
   const homeRoutes = require('./routes/home') (db, router);
 
   router.use('/', [
