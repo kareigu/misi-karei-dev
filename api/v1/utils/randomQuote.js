@@ -1,11 +1,13 @@
 const getRandomIndex = require('./getRandomIndex');
 
 module.exports = async function(db) {
-  return db.count().then(count => {
-    const index = getRandomIndex(count);
-    return db.find({"number": index}).then(result => {
-      const idx = getRandomIndex(result.length - 1);
-      return result[idx];
-    });
-  });
+  const count = await db.count();
+  const index = getRandomIndex(count);
+  
+  const result = await db.findOne({"number": index});
+
+  if(result)
+    return result;
+  else
+    return await db.findOne({"number": getRandomIndex(count)});
 }
