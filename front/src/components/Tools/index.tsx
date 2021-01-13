@@ -70,9 +70,11 @@ function Tools() {
 
       <header className="Misc-header">
         <h2 id="toolsTitle">Tools</h2>
-        <IconButton onClick={() => setSettingsOpen(!settingsOpen)} color="primary">
-          A
-        </IconButton>
+        { user.permLevel > 3 &&
+          <IconButton onClick={() => setSettingsOpen(!settingsOpen)} color="primary">
+            A
+          </IconButton>
+        }
       </header>
       { user.permLevel > 3 &&
         <Container className="streamNtf">
