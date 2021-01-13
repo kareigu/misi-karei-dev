@@ -2,8 +2,7 @@ import React from 'react';
 
 import { 
   Backdrop, Container, createStyles, 
-  makeStyles, Theme, Drawer, IconButton,
-  TextField
+  makeStyles, Theme, Drawer, IconButton
 } from '@material-ui/core'
 
 import StreamNotify from '../StreamNotify';
@@ -52,9 +51,6 @@ function Tools() {
       });
   }, []);
 
-  /* useLayoutEffect(() => {
-    setTimeout(() => setLoading(false), 1000);
-  }); */
 
   return (
     <div>
