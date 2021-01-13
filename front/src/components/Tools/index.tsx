@@ -67,7 +67,7 @@ function Tools() {
       </Drawer>
 
       <header className="Misc-header">
-        <h2 id="toolsTitle">Tools</h2>
+        <h2 id="toolsTitle" style={{animation: user.permLevel > 3 ? 'slide-right 0.5s ease' : 'slide-left 0.5s ease'}} >Tools</h2>
         { user.permLevel > 3 &&
           <IconButton className="settingsDrawerToggle" onClick={() => setSettingsOpen(!settingsOpen)} color="primary">
             <Settings />
