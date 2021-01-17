@@ -94,7 +94,7 @@ function Emotes() {
       }
 
       { !loading &&
-        <Container maxWidth="xs">
+        <Container maxWidth="xs" className="emotesTableContainer">
           <TableContainer component={Paper} className={classes.header}>
             <Table className={classes.table} aria-label="simple table">
               <TableHead className={classes.header}>
