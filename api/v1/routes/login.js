@@ -128,9 +128,10 @@ module.exports = function(db, router) {
       res.send(discordInfo.status);
     else {
       try {
-        const { permissionLevel, access_token } = await db.findOne({id: discordInfo.id});
+        const { permissionLevel, access_token, token_type } = await db.findOne({id: discordInfo.id});
         discordInfo.permissionLevel = permissionLevel;
         discordInfo.access_token = access_token;
+        discordInfo.token_type = token_type;
         res.send(discordInfo);
       } catch (err) {
         console.error(err);
