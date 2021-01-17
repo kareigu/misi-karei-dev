@@ -23,11 +23,12 @@ module.exports = async function(db, data) {
   let discordProfile = await fetchDiscordProfile(data);
 
   if(discordProfile.username === 'undefined#undefined') {
-    const userData = await db.findOne({id: data.id});
-
-    const newData = await refreshDiscordToken(db, userData);
-
-    discordProfile = await fetchDiscordProfile(newData);
+    const status = {
+      code: 'Token-expired',
+      message: 'Access token has expired'
+    }
+    responseTemplate.status = status;
+    return responseTemplate;
   }
     
     
