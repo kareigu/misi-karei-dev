@@ -70,7 +70,11 @@ function Home() {
               <Card className="contentCard">
                 <CardContent className="cardContent">
                   <Typography className="cardTitle">
-                    <Badge badgeContent={homeContent.dailyQuotes.number} max={9999} color="primary">
+                    <Badge 
+                      badgeContent={homeContent.dailyQuotes.number} 
+                      max={9999}
+                      color="primary"
+                    >
                       Päivän quote &nbsp; &nbsp; &nbsp;
                     </Badge>
                   </Typography>
@@ -85,7 +89,11 @@ function Home() {
             <Card className="contentCard">
               <CardContent className="cardContent">
                 <Typography className="cardTitle">
-                  <Badge badgeContent={homeContent.dailyNiilo.number} max={9999} color="secondary">
+                  <Badge 
+                    badgeContent={homeContent.dailyNiilo.number} 
+                    max={9999} 
+                    color="secondary"
+                  >
                     Päivän niilo &nbsp; &nbsp; &nbsp;
                   </Badge>
                 </Typography>

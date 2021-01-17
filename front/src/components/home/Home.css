@@ -20,19 +20,13 @@ body {
   margin: 0px 25px;
   background-color: rgb(27, 37, 43);
   color: white;
+  animation: blend-inn 3s ease;
 }
 
 .MuiBadge-badge {
   top: 10px;
 }
 
-
-#logo {
-  width: 500px;
-  animation: blend-inn 1s ease;
-  height: 100%;
-  width: 100%;
-}
 
 @keyframes blend-inn {
   0% {
