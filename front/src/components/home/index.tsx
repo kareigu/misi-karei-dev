@@ -24,17 +24,27 @@ export interface IHomeContent {
 
 function Home() {
   const [homeContent, setHomeContent] = useState<IHomeContent>();
+	const [YTOptions, setYTOptions] = 
+    useState({
+      width: window.innerWidth < 898 ? (window.innerWidth - 120).toString() : '768',
+      height: window.innerWidth < 898 ? (window.innerWidth / 2.5).toString() : '380'
+    });
 
   useEffect(() => {
+		window.addEventListener('resize', () => {
+      const newOptions = {
+        width: window.innerWidth < 898 ? (window.innerWidth - 120).toString() : '768',
+        height: window.innerWidth < 898 ? (window.innerWidth / 2.5).toString() : '380'
+      }
+
+      setYTOptions(newOptions);
+    });
+		
+		
     fetch(`${reqPath}home/content`)
       .then(res => res.json())
       .then(json => setHomeContent(json));
   }, []);
-
-  const YTOptions = {
-    width: window.innerWidth < 768 ? (window.innerWidth - 120).toString() : '768',
-    height: window.innerWidth < 768 ? (window.innerWidth / 2.5).toString() : '380'
-  }
 
   return (
     <div id="homeComponent">
