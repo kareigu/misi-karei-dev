@@ -6,7 +6,7 @@ module.exports = async function(db, params) {
     return db.find().then(res => res);
   } else {
     let output;
-    if(params.search === '§') {
+    if(params.search === '§' || params.search === 'Â§') {
       const latest = await db.find({}, {sort: {number: -1}, limit: 1});
       output = latest[0]
     } else {
