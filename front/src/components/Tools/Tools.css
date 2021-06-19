@@ -41,6 +41,19 @@ body {
   animation: slide-up 0.5s ease;
 }
 
+.add-changelog {
+  position: relative;
+  display: grid;
+  margin: auto;
+  margin-top: 10px;
+  top: 50px;
+  width: 450px;
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  background-color: rgba(221, 211, 255, 0.2);
+  animation: slide-up 0.5s ease;
+}
+
 .userList {
   position: relative;
   display: grid;

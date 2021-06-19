@@ -19,6 +19,7 @@ import SettingsDrawer from '../SettingsDrawer';
 
 import paths from '../../utils/paths.json';
 import Announce from '../Announce';
+import AddChangeLog from '../AddChangeLog';
 const reqPath = process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath;
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -83,6 +84,10 @@ function Tools() {
 
         <Container className="announce">
           <Announce />
+        </Container>
+
+        <Container className="add-changelog">
+          <AddChangeLog />
         </Container>
       </>
       }

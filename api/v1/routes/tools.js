@@ -6,11 +6,14 @@ const getSaana = require('../utils/tools/getSaana');
 const addSaana = require('../utils/tools/addSaana');
 const rmSaana = require('../utils/tools/rmSaana');
 const announce = require('../utils/tools/announce');
+const getChangelog = require('../utils/tools/getChangelog');
+const addChangelog = require('../utils/tools/addChangelog');
 
 module.exports = function (db, router) {
   const users = db.get('users');
   const homeContent = db.get('homeContent');
   const saana = db.get('saana');
+  const changelog = db.get('changelog');
 
   router.post('/tools/notify', (req, res) => {
     checkPermissions(users, req.headers.authorization, 4)
@@ -62,6 +65,16 @@ module.exports = function (db, router) {
     } else {
       res.send({msg: 'Invalid permissions'});
     }
+  });
+
+  router.get('/tools/changelog', async (req, res) => {
+    const response = await getChangelog(changelog);
+    res.send(response);
+  });
+
+  router.post('/tools/changelog', async (req, res) => {
+    const response = await addChangelog(changelog, req.body);
+    res.send(response);
   });
 
   router.post('/tools/checkid', async (req, res) => {
