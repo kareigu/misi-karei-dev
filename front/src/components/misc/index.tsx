@@ -31,6 +31,7 @@ const convertToValidHash = (): LocHash => {
 const Timeout = React.lazy(() => import('../timeout'));
 const Emotes = React.lazy(() => import('../Emotes'));
 const Nappulat = React.lazy(() => import('../Nappulat'));
+const Saana = React.lazy(() => import('../Saana'));
 
 function Misc() {
 
@@ -129,6 +130,10 @@ function Misc() {
           
           {active === 'nappulat' &&
             <Nappulat />
+          }
+
+          { active === 'saana' &&
+            <Saana />
           }
 
         </Suspense>

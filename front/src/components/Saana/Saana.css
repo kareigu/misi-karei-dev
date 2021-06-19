@@ -1,0 +1,57 @@
+
+.saana-page {
+  margin-top: 3rem;
+}
+
+.saana-nick {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-top: white solid 1px;
+}
+
+.add-controls {
+  margin-top: 2rem;
+}
+
+.addQuoteField {
+  left: 25px;
+  width: 400px;
+  height: 25px;
+  bottom: 10px;
+  animation: slide-right 0.25s ease;
+}
+
+.addQuoteButtons {
+  animation: slide-right 0.1s ease backwards;
+}
+
+.MuiInputBase-input {
+  color: white;
+}
+.MuiFormLabel-root {
+  color: white;
+}
+
+@keyframes slide-left {
+  0% {
+      opacity: 0;
+      transform: translateX(120px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
+
+@keyframes slide-right {
+  0% {
+      opacity: 0;
+      transform: translateX(-120px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
