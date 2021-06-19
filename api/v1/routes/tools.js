@@ -73,8 +73,13 @@ module.exports = function (db, router) {
   });
 
   router.post('/tools/changelog', async (req, res) => {
-    const response = await addChangelog(changelog, req.body);
-    res.send(response);
+    const perm = checkPermissions(users, req.headers.authorization, 4);
+    if(perm) {
+      const response = await addChangelog(changelog, req.body);
+      res.send(response);
+    } else {
+      res.send({msg: "Invalid permissions"})
+    }
   });
 
   router.post('/tools/checkid', async (req, res) => {
