@@ -18,6 +18,7 @@ import SettingsDrawer from '../SettingsDrawer';
 
 
 import paths from '../../utils/paths.json';
+import Announce from '../Announce';
 const reqPath = process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath;
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -75,9 +76,15 @@ function Tools() {
         }
       </header>
       { user.permLevel > 3 &&
+      <>
         <Container className="streamNtf">
           <StreamNotify />
         </Container>
+
+        <Container className="announce">
+          <Announce />
+        </Container>
+      </>
       }
       <Container className="userList">
         <UserList />

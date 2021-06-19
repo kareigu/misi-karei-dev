@@ -5,6 +5,7 @@ const checkID = require('../utils/users/checkID');
 const getSaana = require('../utils/tools/getSaana');
 const addSaana = require('../utils/tools/addSaana');
 const rmSaana = require('../utils/tools/rmSaana');
+const announce = require('../utils/tools/announce');
 
 module.exports = function (db, router) {
   const users = db.get('users');
@@ -51,6 +52,11 @@ module.exports = function (db, router) {
     } else {
       res.send({msg: 'Invalid permissions'});
     }
+  });
+
+  router.post('/tools/announce', async (req, res) => {
+    const a = await announce(req.body);
+    res.send({msg: 'Announcement sent'});
   });
 
   router.post('/tools/checkid', async (req, res) => {
