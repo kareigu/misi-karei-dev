@@ -55,8 +55,13 @@ module.exports = function (db, router) {
   });
 
   router.post('/tools/announce', async (req, res) => {
-    const a = await announce(req.body);
-    res.send({msg: 'Announcement sent'});
+    const perm = checkPermissions(users, req.headers.authorization, 4);
+    if(perm) {
+      const a = await announce(req.body);
+      res.send({msg: 'Announcement sent'});
+    } else {
+      res.send({msg: 'Invalid permissions'});
+    }
   });
 
   router.post('/tools/checkid', async (req, res) => {
