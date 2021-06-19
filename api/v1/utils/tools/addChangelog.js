@@ -19,7 +19,7 @@ module.exports = async function(db, body) {
     message += '\n```'
 
     const body = {
-      hook: 'botspam',
+      hook: 'ahha',
       message,
       pre: false
     }
