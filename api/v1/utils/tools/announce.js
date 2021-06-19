@@ -11,6 +11,11 @@ module.exports = async function(body) {
                                   : process.env.TEST_TOKEN
     
     const webhook = new discord.WebhookClient(WH_ID, WH_TOKEN);
-    webhook.send(body.message);
+
+    const message = body.pre 
+      ? '```\n' + body.message + '```'
+      : body.message;
+
+    webhook.send(message);
   }
 }

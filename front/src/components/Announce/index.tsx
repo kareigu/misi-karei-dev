@@ -13,6 +13,7 @@ type response = {
 
 function Announce() {
   const [channel, setChannel] = useState<channel>('ahha');
+  const [pre, setPre] = useState(false);
   const [message, setMessage] = useState('');
 
   function handleSubmit() {
@@ -25,7 +26,11 @@ function Announce() {
           'Content-Type': 'application/json',
           'Authorization': parseAccessToken()
         },
-        body: JSON.stringify({ hook: channel, message })
+        body: JSON.stringify({ 
+          hook: channel, 
+          pre,
+          message 
+        })
       })
       .then(res => res.json())
       .then((json: response) => {
@@ -42,6 +47,13 @@ function Announce() {
         onClick={() => setChannel(channel === 'ahha' ? 'botspam' : 'ahha')}
       >
         { channel === 'ahha' ? '😂 AHHA ' : '🤖 BOTSPAM ' }
+      </Button>
+      <Button 
+        variant="contained"
+        color={ pre ? 'secondary' : 'primary'}
+        onClick={() => setPre(!pre)}
+      >
+        { pre ? 'Preformatted' : 'Raw message' }
       </Button>
       <h1>Post Announcement</h1>
 
