@@ -1,0 +1,12 @@
+
+.changelog {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+pre {
+  font-family: 'Courier New', Courier, monospace;
+  text-align: left;
+}
