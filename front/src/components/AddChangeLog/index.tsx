@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import paths from '../../utils/paths.json';
 
-import { Button, TextField } from '@material-ui/core';
+import { Button, Checkbox, TextField, FormControlLabel } from '@material-ui/core';
 import parseAccessToken from '../../utils/parseAccessToken';
 
 const reqPath = process.env.NODE_ENV === 'development' ? paths.devPath : paths.productionPath;
@@ -12,6 +12,7 @@ type response = {
 
 function AddChangeLog() {
   const [message, setMessage] = useState('');
+  const [announce, setAnnounce] = useState(true);
 
   function handleSubmit() {
     fetch(`${reqPath}tools/changelog`,
@@ -24,7 +25,8 @@ function AddChangeLog() {
           'Authorization': parseAccessToken()
         },
         body: JSON.stringify({  
-          log: message 
+          log: message,
+          announce
         })
       })
       .then(res => res.json())
@@ -47,6 +49,17 @@ function AddChangeLog() {
       </TextField>
 
       <br/>
+      
+      <FormControlLabel control={
+        <Checkbox
+          checked={announce}
+          onChange={e => setAnnounce(e.target.checked)}
+          name="Announce"
+          color="primary"
+       />
+      } label="Announce"/>
+
+      <br/>
       <Button 
         variant="contained"
         color="primary"
@@ -54,6 +67,9 @@ function AddChangeLog() {
       >
         Add
       </Button>
+
+
+
 
       <br/>
     </div>
