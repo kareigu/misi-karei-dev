@@ -1,4 +1,5 @@
 
 module.exports = async function(db) {
-  return await db.find({});
+  const log = await db.find({});
+  return log.reverse();
 }
