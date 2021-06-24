@@ -15,5 +15,6 @@ jobs:
 
       - name: Build docker image
         run: | 
+          mdkir dist
           chmod +x ./build.sh
           ./build.sh
