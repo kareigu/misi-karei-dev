@@ -12,9 +12,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      
+      - name: Add temp files for build
+        run: |
+          mkdir dist
+          touch dist/tmp.tmp
 
       - name: Build docker image
         run: | 
-          mkdir dist
           chmod +x ./build.sh
           ./build.sh
