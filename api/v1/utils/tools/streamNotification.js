@@ -20,7 +20,7 @@ module.exports = function(body, homeContent) {
             if(json.items[0]) {
               const info = json.items[0];
               homeContent.findOneAndUpdate({type: 'latestStream'}, {$set: {value: info.id.videoId}});
-              webhook.send(`Striimi live! \n https://youtube.com/watch?v=${info.id.videoId}`);
+              webhook.send(`Striimi live! \n https://www.youtube.com/c/Misikaani/live`);
               return { msg: 'Sent notification' };
             } else {
               return { msg: "Stream isn't live"};
