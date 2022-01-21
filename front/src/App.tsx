@@ -24,6 +24,7 @@ const Debug = React.lazy(() => import('./components/debug'));
 const Login = React.lazy(() => import('./components/Login'));
 const Tools = React.lazy(() => import('./components/Tools'));
 const Misc = React.lazy(() => import('./components/misc'));
+const NotFound = React.lazy(() => import('./components/404'));
 
 const LoginURL = process.env.NODE_ENV === 'development' ? paths.devOAuth : paths.productionOAuth;
 
@@ -137,9 +138,15 @@ function App() {
               </Suspense>
             </Route>
 
-            <Route path="/">
+            <Route exact path="/">
               <Suspense fallback={renderLoad}>
                 <Home />
+              </Suspense>
+            </Route>
+
+            <Route path="*">
+              <Suspense fallback={renderLoad}>
+                <NotFound />
               </Suspense>
             </Route>
 

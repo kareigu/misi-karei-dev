@@ -20,5 +20,4 @@ jobs:
 
       - name: Build docker image
         run: | 
-          chmod +x ./build.sh
-          ./build.sh
+          make docker
