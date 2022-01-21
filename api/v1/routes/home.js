@@ -15,6 +15,8 @@ module.exports = function(db, router) {
   const dailyNiiloJob = createDailyJob(db, 'niilo');
   dailyNiiloJob.start();
 
+  router.get('/home', (req, res) => res.sendStatus(404));
+
   router.get('/home/content', async (req, res) => {
     const rawContent = await getHomeContent(homeContent);
 

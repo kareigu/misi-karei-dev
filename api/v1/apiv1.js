@@ -15,6 +15,8 @@ module.exports = function (db) {
   const toolRoutes = require('./routes/tools') (db, router);
   const homeRoutes = require('./routes/home') (db, router);
 
+  router.get('/', (req, res) => res.sendStatus(404));
+
   router.use('/', [
                     quoteRoutes, 
                     niiloRoutes, 
@@ -23,5 +25,6 @@ module.exports = function (db) {
                     homeRoutes
                   ]);
 
+  
   return router;
 }

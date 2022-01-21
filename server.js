@@ -43,7 +43,7 @@ const apiv1 = require('./api/v1/apiv1') (db);
 app.use('/api/v1', apiv1);
 
 app.use('/', express.static('./dist'));
-app.get(`/:var(${sites.valid})?`, (req, res) => {
+app.get(`/*`, (req, res) => {
   res.sendFile(`${__dirname}/dist/index.html`)
 });
 
