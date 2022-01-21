@@ -23,6 +23,6 @@ jobs:
           git fetch
           git checkout prod
           git pull
-          ./build.sh
+          make docker
           docker-compose down
           docker-compose up -d
