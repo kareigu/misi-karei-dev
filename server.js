@@ -8,7 +8,6 @@ const cors = require('cors');
 const fs = require('fs');
 const https = require('https');
 const path = require('path');
-const sites = require('./sites.js');
 
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 global.appRoot = path.resolve(__dirname);
