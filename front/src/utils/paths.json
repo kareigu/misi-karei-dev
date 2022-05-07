@@ -2,5 +2,5 @@
   "devPath": "https://localhost:6020/api/v1/",
   "productionPath": "/api/v1/",
   "devOAuth": "https://discord.com/api/oauth2/authorize?client_id=796036924518694935&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Flogin&response_type=code&scope=identify",
-  "productionOAuth": "https://discord.com/api/oauth2/authorize?client_id=796036924518694935&redirect_uri=https%3A%2F%2Fmisi.mxrr.dev%2Flogin&response_type=code&scope=identify"
+  "productionOAuth": "https://discord.com/api/oauth2/authorize?client_id=796036924518694935&redirect_uri=https%3A%2F%2Fmisi.karei.dev%2Flogin&response_type=code&scope=identify"
 }
