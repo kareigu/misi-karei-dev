@@ -5,3 +5,4 @@ files/
 front/node_modules
 mongo_data/
 dump/
+.env

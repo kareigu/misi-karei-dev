@@ -5,6 +5,7 @@ services:
     restart: always
     volumes:
       - ./mongo_data:/data/db
+      - ./dump:/data/db_dump
 
   mongo-express:
     image: mongo-express
@@ -23,3 +24,5 @@ services:
       - ./backups:/usr/src/misi-site/backups
       - ./files:/usr/src/misi-site/files
       - ./logs:/usr/src/misi-site/logs
+      - ./.env:/usr/src/misi-site/.env
+      - ./certs:/usr/src/misi-site/certs
